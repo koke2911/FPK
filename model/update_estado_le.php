@@ -15,7 +15,7 @@ $result = $conn->query($sql);
 
 if ($result) {
    
-    $sql2 = "UPDATE lista_espera SET estado=$estado WHERE id=$id";
+    $sql2 = "UPDATE lista_espera SET estado=$estado WHERE id_solicitud=$id";
 
     $result2= $conn->query($sql2);
 
