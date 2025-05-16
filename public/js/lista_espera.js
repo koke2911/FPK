@@ -4,8 +4,21 @@ function verTraza(id){
     
 }
 
-$(document).ready(function () {
 
+function busca_fecha() {
+    $.ajax({
+        url: "../model/fecha_lista.php",
+        type: "GET",
+        // dataType: 'json',
+        success: function (data) {
+            $('#fecha_lista').val(data);
+        }
+    });
+}
+
+
+$(document).ready(function () {
+    busca_fecha();
 
 
     var grid_solicitudes = $('#grid_solicitudes').DataTable({
@@ -119,39 +132,6 @@ $(document).ready(function () {
         var data = grid_solicitudes.row(this).data();
         id_solicitud=data.ID;
         $('#modal_estado').modal('show');
-        
-        
-                // var id = data.ID;
-                // var estado = $("#estado").val();
-                // var observacion = $("#observacion").val();
-                // $.ajax({
-                //     url: "../model/update_estado_le.php",
-                //     type: "POST",
-                //     dataType: 'json',
-                //     data: {
-                //         id: id,
-                //         estado: estado,
-                //         observacion: observacion
-                //     },
-                //     success: function (data) {
-                //         if (data.codigo == 2) {
-                //             Swal.fire({
-                //                 title: 'Ha ocurrido un error',
-                //                 text: data.mensaje,
-                //                 icon: 'error',
-                //                 confirmButtonText: 'Aceptar'
-                //             });
-                //         } else {
-                //             Swal.fire({
-                //                 title: 'Solicitud Modificada correctamente',
-                //                 icon: 'success',
-                //                 text: data.mensaje,
-                //                 confirmButtonText: 'Aceptar'
-                //             });
-                //             $("#grid_solicitudes").dataTable().fnReloadAjax("../model/datagrid_lista_espera.php");
-                //         }
-                //     }
-                // });
 
     });
 
@@ -189,6 +169,40 @@ $(document).ready(function () {
             }
         });
         $('#modal_estado').modal('hide');
+    });
+
+    $('#btn_actualizar_fecha').click(function () {
+
+        var fecha = $("#fecha_lista").val();
+        console.log(fecha);
+
+        $.ajax({
+            url: "../model/update_fecha_solicitud.php",
+            type: "POST",
+            dataType: 'json',
+            data: {
+                fecha: fecha
+            },
+            success: function (data) {
+                if (data.codigo == 2) {
+                    Swal.fire({
+                        title: 'Ha ocurrido un error',
+                        text: data.mensaje,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Fecha de solicitud modificada correctamente',
+                        icon: 'success',
+                        text: data.mensaje,
+                        confirmButtonText: 'Aceptar'
+                    });
+                    // $("#grid_solicitudes").dataTable().fnReloadAjax("../model/datagrid_lista_espera.php");
+                }
+            }
+        });
+        $('#modal_fecha').modal('hide');
     });
 
 });

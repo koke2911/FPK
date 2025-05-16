@@ -68,11 +68,13 @@ if (empty($_SESSION)) {
             </div>
         </div>
     </div>
-
     <div class="row ">
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-12">
                 <div class="card-body">
+                    <label for="observacion">Fecha lista Espera</label>
+                    <input type="text" id="fecha_lista" >
+                    <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button>
                     <div id="field_wrapper1">
                         <div class="row">
                             <div class="table-responsive" style="overflow-x: hidden;overflow-y:scroll;height: 80vh;padding:1em">

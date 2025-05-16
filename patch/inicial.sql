@@ -175,3 +175,7 @@ INSERT INTO ciudades (codigo, nombre) VALUES
 ('1601', 'Chillán'),
 ('1602', 'Bulnes');
 
+create table fecha_lista (
+fecha varchar(120));
+
+insert into fecha_lista values('30 de Mayo 2025');
