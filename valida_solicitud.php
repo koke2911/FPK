@@ -332,7 +332,7 @@ $id = $_GET['id'];
     <script type="text/javascript" src="public/libreries/js/bootstrap-select/js/bootstrap-select.min.js"></script>
 
 
-    <script type="text/javascript" src="public/js/valida_solicitud.js"></script>
+    <script type="text/javascript" src="public/js/valida_solicitud.js?v=1"></script>
 
 </body>
 

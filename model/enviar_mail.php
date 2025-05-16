@@ -87,7 +87,7 @@ if ($result->num_rows > 0) {
                 $mail->addAddress($email, 'Cliente');
 
                 $mail->isHTML(true);
-                $mail->Subject = 'FonoPlayKids - Asegura un cupo con nosotros!!';
+                $mail->Subject = 'FonoPlayKids - Date prisa y Asegura un cupo con nosotros!!';
                 $mail->Body = $mensaje;
                 
 

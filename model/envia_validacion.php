@@ -42,7 +42,7 @@ function enviaCorreo($id, $txt_email,$conn){
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        $mail->setFrom('koke1592@gmail.com', 'Fono Play Kids');
+        $mail->setFrom('sistemas@saludohiggins.cl', 'Fono Play Kids');
         $mail->addAddress('koke1592@gmail.com', 'Nombre Destino');
 
         $mail->isHTML(true);
