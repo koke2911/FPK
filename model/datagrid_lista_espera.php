@@ -45,18 +45,18 @@ if ($result->num_rows > 0) {
 
 
         $filas[] = [
-            'ID' => $row['ID'],
-            'ID_LE' => $row['ID_LE'],
-            'NOMBRE' => $row['NOMBRE'],
-            'RUT' => $row['RUT'],
-            'EDAD' => $row['EDAD'],
-            'NOMBRE_RESPONSABLE' => $row['NOMBRE_RESPONSABLE'],
-            'EMAIL' => $row['EMAIL'],
-            'FONO' => $row['FONO'],
-            'COMUNA' => $row['COMUNA'],
-            'DIRECCION' => $row['DIRECCION'],
-            'FECHA_SOLICITUD' => $row['FECHA_SOLICITUD'],
-            'ESTADO' => $row['ESTADO']
+            'ID' => utf8_encode($row['ID']),
+            'ID_LE' => utf8_encode($row['ID_LE']),
+            'NOMBRE' => utf8_encode($row['NOMBRE']),
+            'RUT' => utf8_encode($row['RUT']),
+            'EDAD' => utf8_encode($row['EDAD']),
+            'NOMBRE_RESPONSABLE' => utf8_encode($row['NOMBRE_RESPONSABLE']),
+            'EMAIL' => utf8_encode($row['EMAIL']),
+            'FONO' => utf8_encode($row['FONO']),
+            'COMUNA' => utf8_encode($row['COMUNA']),
+            'DIRECCION' => utf8_encode($row['DIRECCION']),
+            'FECHA_SOLICITUD' => utf8_encode($row['FECHA_SOLICITUD']),
+            'ESTADO' => utf8_encode($row['ESTADO'])
         ];
     }
 }

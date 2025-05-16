@@ -34,17 +34,17 @@ if ($result->num_rows > 0) {
         
 
         $filas[] = [
-            'ID' => $row['ID'],
-            'NOMBRE' => $row['NOMBRE'],
-            'RUT' => $row['RUT'],
-            'EDAD' => $row['EDAD'],
-            'EMAIL' => $row['EMAIL'],
-            'FONO' => $row['FONO'],
+            'ID' => utf8_encode($row['ID']),
+            'NOMBRE' => utf8_encode($row['NOMBRE']),
+            'RUT' => utf8_encode($row['RUT']),
+            'EDAD' => utf8_encode($row['EDAD']),
+            'EMAIL' => utf8_encode($row['EMAIL']),
+            'FONO' => utf8_encode($row['FONO']),
             'REGION' => utf8_encode($row['REGION']),
-            'CIUDAD' => $row['CIUDAD'],
-            'COMUNA' => $row['COMUNA'],
-            'FECHA_SOLICITUD' => $row['FECHA_SOLICITUD'],
-            'CORREO' => $row['CORREO']
+            'CIUDAD' => utf8_encode($row['CIUDAD']),
+            'COMUNA' => utf8_encode($row['COMUNA']),
+            'FECHA_SOLICITUD' => utf8_encode($row['FECHA_SOLICITUD']),
+            'CORREO' => utf8_encode($row['CORREO'])
         ];
     }
 
