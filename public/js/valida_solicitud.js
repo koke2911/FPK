@@ -45,7 +45,7 @@ function enviaValidacion(){
 
     Swal.fire({
         title: 'Un momento por favor...',
-        html: 'Estamos validando la informaci n',
+        html: 'Estamos validando la información',
         // allowOutsideClick: false,
         onBeforeOpen: () => {
             Swal.showLoading();

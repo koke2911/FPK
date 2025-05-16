@@ -56,7 +56,7 @@ if (empty($_SESSION)) {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="observacion">Observaci n</label>
+                            <label for="observacion">Observación</label>
                             <textarea id="observacion" class="form-control" rows="3" maxlength="250"></textarea>
                         </div>
                     </div>
