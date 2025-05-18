@@ -2,13 +2,14 @@
 session_start();
 require_once('../config/database.php');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 
 $_SESSION['servername'] = $servername;
 $_SESSION['username'] = $username;
 $_SESSION['password'] = $password;
 $_SESSION['dbname'] = $dbname;
+$_SESSION['port'] = $port;
 
 
 $usuario = $_POST['usuario'];

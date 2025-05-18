@@ -780,14 +780,14 @@
         <section id="contacto">
             <h2>Contacto</h2>
             <form>
-                <input type="text" name="txt_nombre" id="txt_nombre" placeholder="Nombre y apellido del niño" required />
-                <input type="text" name="txt_rut" id="txt_rut" placeholder="Rut 11111111-1 del niño" required />
-                <input type="number" name="txt_edad" id="txt_edad" placeholder="Edad del niño" required maxlength="2" />
+                <input type="text" name="txt_nombre" id="txt_nombre" placeholder="Nombre y apellido del niñ@" required />
+                <input type="text" name="txt_rut" id="txt_rut" placeholder="Rut 11111111-1 del niñ@" required />
+                <input type="text" name="dt_nacimiento" id="dt_nacimiento" placeholder="Nacimiento del niñ@  dd-mm-yyyy" required maxlength="10" />
                 <input type="email" name="txt_email" id="txt_email" placeholder="Correo electrónico" required />
                 <input type="tel" name="txt_fono" id="txt_fono" placeholder="Teléfono +569" required maxlength="8" />
                 <select class="form-control" id="cmb_region" name="cmb_region" placeholder="Región"></select>
-                <select class="form-control" id="cmb_ciudad" name="cmb_ciudad"></select>
-                <input type="text" name="txt_comuna" id="txt_comuna" placeholder="Comuna" required />
+                <select class="form-control" id="cmb_comuna" name="cmb_comuna" placeholder="comuna"></select>
+                <input type="text" name="txt_sector" id="txt_sector" placeholder="Sector" required maxlength="200" />
                 <button type="button" id="btn_enviar">Enviar</button>
             </form>
         </section>

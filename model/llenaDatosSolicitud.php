@@ -2,7 +2,7 @@
 
 require_once('../config/database.php');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 $id = $_POST['id'];
 
@@ -32,10 +32,10 @@ if ($result->num_rows > 0) {
             'EDAD' => $row['EDAD'],
             'EMAIL' => $row['EMAIL'],
             'FONO' => $row['FONO'],
-            'REGION' => utf8_encode($row['REGION']),
-            'CIUDAD' => $row['CIUDAD'],
-            'COMUNA' => $row['COMUNA'],
-            'FECHA_SOLICITUD' => $row['FECHA_SOLICITUD'],
+            // 'REGION' => utf8_encode($row['REGION']),
+            // 'CIUDAD' => $row['CIUDAD'],
+            // 'COMUNA' => $row['COMUNA'],
+            // 'FECHA_SOLICITUD' => $row['FECHA_SOLICITUD'],
             'CORREO' => $row['CORREO']
         ];
     }

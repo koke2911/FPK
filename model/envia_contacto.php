@@ -2,33 +2,46 @@
 session_start();
 require_once('../config/database.php');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 $txt_nombre = $_POST['txt_nombre'];
 $txt_rut = $_POST['txt_rut'];
-$txt_edad = $_POST['txt_edad'];
+$dt_nacimiento = $_POST['dt_nacimiento'];
 $txt_email = $_POST['txt_email'];
 $txt_fono = $_POST['txt_fono'];
 $cmb_region = $_POST['cmb_region'];
-$cmb_ciudad = $_POST['cmb_ciudad'];
 $cmb_comuna = $_POST['cmb_comuna'];
+$txt_sector = $_POST['txt_sector'];
 
+$fecha_nacimiento = \DateTime::createFromFormat('d-m-Y', $dt_nacimiento);
+$fecha_hoy = new \DateTime();
+$interval = $fecha_hoy->diff($fecha_nacimiento);
 
+$anos = $interval->format('%y');
+$meses = $interval->format('%m');
+$dias = $interval->format('%d');
+
+$edad = $anos . ' años ' . $meses . ' meses ' ;
+
+// echo $edad;
+// exit();
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 
-$sql = "INSERT INTO solicitudes (nombre, rut, edad, email, fono, region, ciudad, comuna, estado, fecha_soliciud) 
-VALUES ('{$txt_nombre}', '{$txt_rut}', '{$txt_edad}', '{$txt_email}', '{$txt_fono}', '{$cmb_region}', '{$cmb_ciudad}', '{$cmb_comuna}', 0, now())";
+$sql = "INSERT INTO solicitudes (nombre,edad, rut, fecha_nacimiento, email, fono, region, comuna,sector, estado, fecha_soliciud) 
+VALUES ('{$txt_nombre}','{$edad}', '{$txt_rut}', STR_TO_DATE('{$dt_nacimiento}', '%d-%m-%Y') , '{$txt_email}', '{$txt_fono}', '{$cmb_region}', '{$cmb_comuna}','{$txt_sector}', 0, now())";
 
+
+// echo $sql;
 $result = $conn->query($sql);
 
 if ($result) {
     echo json_encode(['codigo' => 0, 'mensaje' => 'Felicidades ya diste el primer paso, nos pondremos en contacto a la brevedad posible al correo electronico registrado en el formulario']);
 } else {
-    echo json_encode(['codigo' => -1, 'mensaje' => 'Error al crear el registro', 'error' => $conn->error]);
+    echo json_encode(['codigo' => 2, 'mensaje' => 'Error al crear el registro', 'error' => $conn->error]);
 
 }
 

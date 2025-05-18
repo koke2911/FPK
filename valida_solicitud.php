@@ -296,7 +296,7 @@ $id = $_GET['id'];
             <form>
                 <input type="hidden" name="id" id="id" placeholder="ID" value="<?php echo $id; ?>" />
                 <input type="text" name="txt_nombre" id="txt_nombre" placeholder="Nombre del niño o niña" required disabled />
-                <input type="number" name="txt_edad" id="txt_edad" placeholder="Edad del niño o niña" required maxlength="2" disabled />
+                <input type="text" name="txt_edad" id="txt_edad" placeholder="Edad del niño o niña" required maxlength="10" disabled />
                 <input type="text" name="txt_rut" id="txt_rut" placeholder="RUT del niño o niña" required disabled />
                 <input type="text" name="txt_direccion" style="border-color:red;" id="txt_direccion" placeholder="Dirección completa" required />
                 <input type="text" name="txt_nombre_adulto" style="border-color:red;" id="txt_nombre_adulto" placeholder="Nombre del adulto responsable" required />

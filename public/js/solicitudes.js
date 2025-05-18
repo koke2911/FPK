@@ -117,15 +117,15 @@ $(document).ready(function () {
         "destroy": true,
         "ajax": "../model/datagrid_solicitudes.php?estado=" + estado,
         "columns": [
-            { "data": "ID" },
+            { "data": "ID" ,"visible":false},
             { "data": "NOMBRE" },
             { "data": "RUT" },
             { "data": "EDAD" },
             { "data": "EMAIL" },
             { "data": "FONO" },
             { "data": "REGION" },
-            { "data": "CIUDAD" },
-            { "data": "COMUNA" },
+            // { "data": "COMUNA" },
+            { "data": "SECTOR" },
             { "data": "FECHA_SOLICITUD" },
             {
                 "data": "ID",

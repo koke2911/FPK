@@ -52,9 +52,7 @@ if (empty($_SESSION)) {
                                             <th>Edad</th>
                                             <th>email</th>
                                             <th>Fono</th>
-                                            <th>Region</th>
-                                            <th>Ciudad</th>
-                                            <th>Comuna</th>
+                                            <th>Region-Comuna</th>                                            
                                             <th>Fecha</th>
                                             <th>Enviar</th>
                                             <th>Accion</th>                                            

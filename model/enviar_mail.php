@@ -5,6 +5,8 @@ $servername = $_SESSION['servername'];
 $username = $_SESSION['username'];
 $password = $_SESSION['password'];
 $dbname = $_SESSION['dbname'];
+$port = $_SESSION['port'];
+
 
 $id=$_POST['id'];
 
@@ -12,8 +14,10 @@ require_once("../public/libreries/PHPMailer/src/PHPMailer.php");
 require_once("../public/libreries/PHPMailer/src/SMTP.php");
 require_once("../public/libreries/PHPMailer/src/Exception.php");
 
+require_once("../config/variables.php");
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -35,10 +39,7 @@ if($filas[0]['correo']>0){
 
 
 
-$sql = "SELECT s.id as ID,s.nombre as NOMBRE,s.rut as RUT,s.edad as EDAD,s.email as EMAIL,s.fono as FONO,r.nombre as REGION,c.nombre as CIUDAD,ifnull(s.comuna,'-')  as COMUNA,s.fecha_soliciud  as FECHA_SOLICITUD 
-from solicitudes s 
-inner join regiones r on r.codigo=s.region
-inner join ciudades c on c.codigo=s.ciudad where id=$id";
+$sql = "SELECT s.email as EMAIL from solicitudes s  where id=$id";
 $result = $conn->query($sql);
 
 $filas = [];
@@ -62,7 +63,9 @@ if ($result->num_rows > 0) {
                 <p>Te has puesto en contacto con <strong>Fono Play Kids</strong> bajo la orden N°#' . $id . '.</p>
                 <p>Para continuar con el proceso y asegurarte una atención oportuna y de calidad, por favor sigue los siguientes pasos:</p>
                 <ol>
-                    <li>Ingresa a la siguiente página: <a href="https://www.fonoplaykids.cl/valida_solicitud.php?id=' . $id_encript . '">https://www.fonoplaykids.cl/valida_solicitud/</a></li>
+                    <li>Revisa los documentos adjuntos en este correo y revisa nuestras tarifas.</li>
+                    <li>En caso de estar de acuerdo con nuestras tarifas y te interesas en alguno de nuestros servicios sigue con los siguientes pasos</li>
+                    <li>Ingresa a la siguiente página: <a href="https://fonoplaykids.cl/valida_solicitud.php?id=' . $id_encript . '">https://fonoplaykids.cl/valida_solicitud/</a></li>
                     <li>Llena el formulario con los datos solicitados.</li>
                 </ol>
                 <p>Esto garantiza que tengas un cupo con nosotros. Una vez llenado y enviado el formulario, validaremos tus datos y te generaremos un cupo en nuestra lista de espera.</p>
@@ -78,17 +81,20 @@ if ($result->num_rows > 0) {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'sistemas@saludohiggins.cl';
-                $mail->Password = 'zqucioripnjvuqkd';
+                $mail->Username = $correo;
+                $mail->Password = $pass;
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
-                $mail->setFrom('sistemas@saludohiggins.cl', 'Fono Play Kids');
+                $mail->setFrom($correo, 'Fono Play Kids');
                 $mail->addAddress($email, 'Cliente');
 
                 $mail->isHTML(true);
                 $mail->Subject = 'FonoPlayKids - Date prisa y Asegura un cupo con nosotros!!';
                 $mail->Body = $mensaje;
+
+                 $mail->addAttachment('../public/document/Nosotros_y_Tarifas.pdf', 'Nosotros_y_Tarifas.pdf');
+                 $mail->addAttachment('../public/document/Adicionales.pdf', 'Adicionales.pdf');
                 
 
                 if ($mail->send()) {

@@ -3,7 +3,7 @@ session_start();
 
 $rut_usuario = $_SESSION['rut_usuario'];
 $nombre_usuario = $_SESSION['nombre_usuario'];
-$estado = $_GET['estado'];
+// $estado = $_GET['estado'];
 
 if (empty($_SESSION)) {
     header("Location: ../index.php");
@@ -27,7 +27,7 @@ if (empty($_SESSION)) {
 </head>
 
 <body>
-    <input type="hidden" id="estado" value="<?php echo $estado; ?>">
+    <!-- <input type="hidden" id="estado" value=" <?php echo $estado; ?>"> -->
     <h2 class="text-center">Lista de Espera</h2>
     <div class="modal fade" id="modal_estado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -88,8 +88,8 @@ if (empty($_SESSION)) {
                                             <th>Responsable</th>
                                             <th>email</th>
                                             <th>Fono</th>
-                                            <th>Ciudad</th>
                                             <th>Comuna</th>
+                                            <th>Direccion</th>
                                             <th>Fecha</th>
                                             <th>Estado</th>
                                             <th>Traza</th>

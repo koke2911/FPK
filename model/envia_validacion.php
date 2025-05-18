@@ -2,7 +2,9 @@
 
 require_once('../config/database.php');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 $id = $_POST['id'];
 $txt_nombre = $_POST['txt_nombre'];
@@ -19,6 +21,7 @@ require("../public/libreries/PHPMailer/src/Exception.php");
 use PHPMailer\PHPMailer\PHPMailer;
 
 function enviaCorreo($id, $txt_email,$conn){
+    require_once("../config/variables.php");
 
     $sql = "SELECT fecha from fecha_lista";
 
@@ -37,13 +40,13 @@ function enviaCorreo($id, $txt_email,$conn){
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'sistemas@saludohiggins.cl';
-        $mail->Password = 'zqucioripnjvuqkd';
+        $mail->Username = $correo;
+        $mail->Password = $pass;
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        $mail->setFrom('sistemas@saludohiggins.cl', 'Fono Play Kids');
-        $mail->addAddress('koke1592@gmail.com', 'Nombre Destino');
+        $mail->setFrom($correo, 'Fono Play Kids');
+        $mail->addAddress($txt_email, 'Cliente');
 
         $mail->isHTML(true);
         $mail->Subject = 'FonoPlayKids - Felicidades ya entraste a nuestra lista de espera!!';
@@ -81,8 +84,8 @@ function enviaCorreo($id, $txt_email,$conn){
 
 
         // Attach files to the email
-        $mail->addAttachment('../public/document/Nosotros.pdf', 'Nosotros.pdf');
-        $mail->addAttachment('../public/document/Tarifas.pdf', 'Tarifas.pdf');
+        // $mail->addAttachment('../public/document/Nosotros.pdf', 'Nosotros.pdf');
+        // $mail->addAttachment('../public/document/Tarifas.pdf', 'Tarifas.pdf');
 
 
 

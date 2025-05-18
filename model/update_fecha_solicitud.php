@@ -2,7 +2,7 @@
 session_start();
 require_once('../config/database.php');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 $fecha = $_POST['fecha'];
 
