@@ -26,7 +26,7 @@ $sql = "SELECT s.id as ID,
                 l.fono as FONO,
                 ifnull(c.nombre,'-')  as COMUNA,
                 l.direccion as DIRECCION,
-                l.fecha as FECHA_SOLICITUD,
+                s.fecha_soliciud as FECHA_SOLICITUD,
                 e.glosa as ESTADO
                 from solicitudes s 
                 inner join lista_espera l on l.id_solicitud=s.id
