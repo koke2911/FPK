@@ -26,7 +26,7 @@ if (empty($_SESSION)) {
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg shadow">
+    <!-- <header class="navbar navbar-expand-lg shadow">
         <div class="container-fluid d-flex justify-content-between">
             <a class="navbar-brand" href="#" style="padding-right: 20px;"><i class="fas fa-bars me-2" id="ocultarBarraLateral" style="padding-right: 20px;"></i>FonoPlayKids <i class="fas fa-bell me-2" style="padding-right: 20px;color:#1abc9c"></i></a>
             <span><?php echo strtoupper($nombre_usuario . ' | ' . $rut_usuario); ?></span>
@@ -50,7 +50,42 @@ if (empty($_SESSION)) {
         <main>
             <iframe src="" id="principal"></iframe>
         </main>
+    </div> -->
+
+    <header class="navbar navbar-expand-lg shadow" style="background-color: #2f2744;">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white" href="#">
+                <i class="fas fa-bars me-2" id="ocultarBarraLateral" style="cursor: pointer;"></i>
+                FonoPlayKids
+            </a>
+            <span class="text-white"><?php echo strtoupper($nombre_usuario . ' | ' . $rut_usuario); ?></span>
+            <div>
+                <button class="btn btn-outline-light me-2" id="miPerfil">
+                    <i class="fas fa-user me-1"></i>Mi Perfil
+                </button>
+                <button class="btn btn-danger" id="cerrarSesion">
+                    <i class="fas fa-power-off"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="d-flex" >
+        <nav class="sidebar">
+            <ul>
+                <li><button id="menu_solicitudes"><i class="fas fa-users me-2"></i> Solicitudes</button></li>
+                <li><button id="menu_rechazadas"><i class="fas fa-user-times me-2"></i> Rechazadas</button></li>
+                <li><button id="menu_listaE"><i class="fas fa-list me-2"></i> Lista Espera</button></li>
+                <li><button id="menu_atencion"><i class="fas fa-medkit me-2"></i> En Proceso</button></li>
+                <li><button id="menu_finish"><i class="fas fa-lock me-2"></i> Finalizados</button></li>
+            </ul>
+        </nav>
+
+        <main>
+            <iframe src="" id="principal"></iframe>
+        </main>
     </div>
+
 
 
     <script src="../public/libreries/bootstrap-4.6/jquery-3.6.0.min.js"></script>
