@@ -298,8 +298,8 @@ $id = $_GET['id'];
                 <input type="text" name="txt_nombre" id="txt_nombre" placeholder="Nombre del niño o niña" required disabled />
                 <input type="text" name="txt_edad" id="txt_edad" placeholder="Edad del niño o niña" required maxlength="10" disabled />
                 <input type="text" name="txt_rut" id="txt_rut" placeholder="RUT del niño o niña" required disabled />
-                <input type="text" name="txt_direccion" style="border-color:red;" id="txt_direccion" placeholder="Dirección completa" required />
-                <input type="text" name="txt_nombre_adulto" style="border-color:red;" id="txt_nombre_adulto" placeholder="Nombre del adulto responsable" required />
+                <input type="text" name="txt_direccion" style="border-color:red;" id="txt_direccion" placeholder="Dirección completa" required maxlength="150"/>
+                <input type="text" name="txt_nombre_adulto" style="border-color:red;" id="txt_nombre_adulto" placeholder="Nombre del adulto responsable" required maxlength="150"/>
                 <input type="tel" name="txt_fono" id="txt_fono" placeholder="Teléfono de contacto +569" required maxlength="8" />
                 <input type="email" name="txt_email" id="txt_email" placeholder="Correo electrónico" required disabled />
 

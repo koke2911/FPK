@@ -42,6 +42,7 @@ alter table solicitudes add sector varchar(255);
 alter table solicitudes add fecha_nacimiento date;
 alter table solicitudes modify edad varchar(100);
 
+
 --drop table lista_espera;
 
 create table lista_espera (
@@ -73,14 +74,21 @@ glosa varchar(100),
 estado int(1));
 
 
-insert into estados_le values(0,'En lista de espera',1);
-insert into estados_le values(1,'Correo enviado',1);
+-- insert into estados_le values(0,'En lista de espera',1);
+insert into estados_le values(1,'En lista Espera',1);
 insert into estados_le values(2,'Seguimiento Whatsapp',1);
 insert into estados_le values(3,'Terapeuta designada',1);
 insert into estados_le values(4,'Proceso completado',1);
 insert into estados_le values(5,'No contesto correo',1);
 insert into estados_le values(6,'No siguio el proceso',1);
-insert into estados_le values(7,'En atención',1);
+insert into estados_le values(7,'En Proceso',1);
+
+-- OTROS ESTADOS 
+insert into estados_le values(8,'Solicitud Recibida',0);
+insert into estados_le values(9,'Correo enviado',0);
+insert into estados_le values(10,'Solicitud Rechazada',0);
+insert into estados_le values(11,'Re-abre Solicitud',0);
+
 
 CREATE TABLE regiones (
     codigo CHAR(2) PRIMARY KEY,

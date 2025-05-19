@@ -30,20 +30,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$conn->begin_transaction();
 
-$sql = "INSERT INTO solicitudes (nombre,edad, rut, fecha_nacimiento, email, fono, region, comuna,sector, estado, fecha_soliciud) 
-VALUES ('{$txt_nombre}','{$edad}', '{$txt_rut}', STR_TO_DATE('{$dt_nacimiento}', '%d-%m-%Y') , '{$txt_email}', '{$txt_fono}', '{$cmb_region}', '{$cmb_comuna}','{$txt_sector}', 0, now())";
+try {
+    $sql = "INSERT INTO solicitudes (nombre,edad, rut, fecha_nacimiento, email, fono, region, comuna,sector, estado, fecha_soliciud) 
+    VALUES ('{$txt_nombre}','{$edad}', '{$txt_rut}', STR_TO_DATE('{$dt_nacimiento}', '%d-%m-%Y') , '{$txt_email}', '{$txt_fono}', '{$cmb_region}', '{$cmb_comuna}','{$txt_sector}', 0, now())";
 
-
-// echo $sql;
-$result = $conn->query($sql);
-
-if ($result) {
+    if (!$conn->query($sql)) {
+        throw new Exception("Error al insertar en lista_espera: " . $conn->error);
+    }
+   
+    $conn->commit();
     echo json_encode(['codigo' => 0, 'mensaje' => 'Felicidades ya diste el primer paso, nos pondremos en contacto a la brevedad posible al correo electronico registrado en el formulario']);
-} else {
-    echo json_encode(['codigo' => 2, 'mensaje' => 'Error al crear el registro', 'error' => $conn->error]);
 
+} catch (Exception $e) {
+    
+    $conn->rollback();
+    echo json_encode(['codigo' => 2, 'mensaje' => 'Error al crear el registro', 'error' => $conn->error]);
 }
 
-
-
+?>

@@ -42,7 +42,7 @@ if (empty($_SESSION)) {
             <button id="menu_solicitudes"><i class="fas fa-users me-2"></i> Solicitudes</button>
             <button id="menu_rechazadas"><i class="fas fa-user-times me-2"></i> Rechazadas</button>
             <button id="menu_listaE"><i class="fas fa-list me-2"></i> L. Espera</button>
-            <button id="menu_atencion"><i class="fas fa-medkit me-2"></i> En atención</button>
+            <button id="menu_atencion"><i class="fas fa-medkit me-2"></i> En Proceso</button>
             <button id="menu_finish"><i class="fas fa-lock me-2"></i>Finalizados</button>
            
         </nav>

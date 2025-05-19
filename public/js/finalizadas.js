@@ -1,7 +1,7 @@
 var id_solicitud;
 
 function verTraza(id) {
-
+    window.location.href = "../views/ver_traza.php?id=" + id;
 }
 
 $(document).ready(function () {

@@ -93,6 +93,12 @@ $(document).ready(function () {
 
     LlenaDatos(id);
 
+    // Add input validation for txt_direccion and txt_nombre_adulto
+    $("#txt_direccion, #txt_nombre_adulto").on("input", function () {
+        this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '');
+    });
+
+
     $("#btn_enviar").click(function () {
         let txt_direccion = $("#txt_direccion").val();
         let txt_nombre_adulto = $("#txt_nombre_adulto").val();

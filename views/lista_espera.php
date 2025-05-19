@@ -44,13 +44,13 @@ if (empty($_SESSION)) {
                             <label for="estado">Estado</label>
                             <select id="cmb_estado" name="id=" estado"" class="form-control">
                                 <option value="0">Seleccione</option>
-                                <option value="1">Correo enviado</option>
+                                <option value="1">En Lista de Espera</option>
                                 <option value="2">Seguimiento Whatsapp</option>
-                                <option value="3">Terapeuta designada</option>
+                                <!-- <option value="3">Terapeuta designada</option> -->
                                 <option value="4">Proceso completado</option>
-                                <option value="5">No contesto correo</option>
+                                <!-- <option value="5">No contesto correo</option> -->
                                 <option value="6">No siguio el proceso</option>
-                                <option value="7">En atencion</option>
+                                <option value="7">En Proceso</option>
                             </select>
                         </div>
                     </div>
@@ -73,7 +73,7 @@ if (empty($_SESSION)) {
             <div class="card shadow mb-12">
                 <div class="card-body">
                     <label for="observacion">Fecha lista Espera</label>
-                    <input type="text" id="fecha_lista" >
+                    <input type="text" id="fecha_lista">
                     <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button>
                     <div id="field_wrapper1">
                         <div class="row">

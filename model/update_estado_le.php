@@ -9,25 +9,26 @@ $id = $_POST['id'];
 $estado = $_POST['estado'];
 $observacion = $_POST['observacion'];
 
-$sql = "INSERT INTO lista_espera_traza (id_solicitud, estado, observacion, fecha, usuario) VALUES ($id, $estado, '$observacion', now(), '$usuario')";
 
-$result = $conn->query($sql);
+$conn->begin_transaction();
 
-if ($result) {
-   
-    $sql2 = "UPDATE lista_espera SET estado=$estado WHERE id_solicitud=$id";
+try {
+        $sql = "INSERT INTO lista_espera_traza (id_solicitud, estado, observacion, fecha, usuario) VALUES ($id, $estado, '$observacion', now(), '$usuario')";
 
-    $result2= $conn->query($sql2);
+        if (!$conn->query($sql)) {
+            throw new Exception("Error al insertar en lista_espera: " . $conn->error);
+        }
+        
+        $sql2 = "UPDATE lista_espera SET estado=$estado WHERE id_solicitud=$id";
+        if (!$conn->query($sql2)) {
+            throw new Exception("Error al insertar en lista_espera: " . $conn->error);
+        }
 
-    if($result2){
+        $conn->commit();
         echo json_encode(['codigo' => 0, 'mensaje' => 'Solicitud actualizada con exito']);
-        exit();
-    }else{
-        echo json_encode(['codigo' => 2, 'mensaje' => 'Error al actualizar la solicitud', 'error' => $conn->error]);
-        exit();
-    }
-
-} else {
-    echo json_encode(['codigo' => 2, 'mensaje' => 'Error al actualizar la solicitud', 'error' => $conn->error]);
-    exit();
+            
+       
+}catch (Exception $e) {
+    $conn->rollback();
+    echo json_encode(['codigo' => 2, 'mensaje' => 'Error en el proceso', 'error' => $e->getMessage()]);
 }

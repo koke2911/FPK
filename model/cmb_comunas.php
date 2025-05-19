@@ -1,13 +1,17 @@
 <?php
-session_start();
+require_once('../config/database.php');
 
-$servername = $_SESSION['servername'];
-$username = $_SESSION['username'];
-$password = $_SESSION['password'];
-$dbname = $_SESSION['dbname'];
-$port = $_SESSION['port'];
 
-$conn = new mysqli($servername, $username, $password, $dbname,$port);
+try {
+    $conn = new mysqli($servername, $username, $password, $dbname, $port);
+    if ($conn->connect_error) {
+        throw new Exception("Connection failed: " . $conn->connect_error);
+    }
+} catch (Exception $e) {
+    echo "Error en la conexi n: " . $e->getMessage();
+    exit();
+}
+
 $region_id=$_GET['region'];
 $condicion='';
 

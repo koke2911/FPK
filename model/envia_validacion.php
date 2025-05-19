@@ -87,16 +87,20 @@ function enviaCorreo($id, $txt_email,$conn){
         // $mail->addAttachment('../public/document/Nosotros.pdf', 'Nosotros.pdf');
         // $mail->addAttachment('../public/document/Tarifas.pdf', 'Tarifas.pdf');
 
-
+       
+        
 
         if ($mail->send()) {
+            $conn->commit();
             echo json_encode(['codigo' => 0, 'mensaje' => 'Felicidades ya diste el primer paso, nos pondremos en contacto a la brevedad posible al correo electronico registrado en el formulario']);
             exit();
         } else {
+            $conn->rollback();
             echo json_encode(['codigo' => 2, 'mensaje' => 'No se ha podido enviar el correo de notificación', 'error' => $conn->error]);
             exit();
         }
     } catch (Exception $e) {
+        $conn->rollback();
         echo json_encode(['codigo' => 2, 'mensaje' => 'Error al enviar el correo', 'error' => $conn->error]);
         exit();
     }
@@ -126,28 +130,34 @@ if ($result->num_rows > 0) {
   
     echo json_encode(['codigo' => 2, 'mensaje' => 'Esta solicitud ya se encuentra en lista de espera, de no haber recibido el correo con la notificacion ponerse en contacto', 'error' => $conn->error]);
     exit();
-} 
+}
 
 
-$sql = "INSERT INTO lista_espera(id_solicitud,nombre_responsable,fono,direccion,fecha,estado)values($id,'$txt_nombre_adulto','$txt_fono','$txt_direccion',now(),0)";
-// echo $sql;
-// exit();
-$result = $conn->query($sql);
+$conn->begin_transaction();
 
-if ($result) {
-
-    $sql2 = "UPDATE solicitudes set estado=2 where id='$id'";
-    $result2 = $conn->query($sql2);
-
-    if ($result2) {
-        enviaCorreo($id, $txt_email,$conn);
-       
-    }else{
-        echo json_encode(['codigo' => 2, 'mensaje' => 'Error al actualizar solicitud', 'error' => $conn->error]);
-        exit();
+try {
+    // Insertar en lista_espera
+    $sqlInsert = "INSERT INTO lista_espera (id_solicitud, nombre_responsable, fono, direccion, fecha, estado)
+                  VALUES ($id, '$txt_nombre_adulto', '$txt_fono', '$txt_direccion', NOW(), 1)";
+    if (!$conn->query($sqlInsert)) {
+        throw new Exception("Error al insertar en lista_espera: " . $conn->error);
+    }
+    
+    // Actualizar estado de la solicitud
+    $sqlUpdate = "UPDATE solicitudes SET estado = 2 WHERE id = '$id'";
+    if (!$conn->query($sqlUpdate)) {
+        throw new Exception("Error al actualizar estado en solicitudes: " . $conn->error);
     }
 
-} else {
-    echo json_encode(['codigo' => 2, 'mensaje' => 'Error al asignar lista de espera', 'error' => $conn->error]);
-    exit();
+    // Aquí puedes enviar correo solo si todo lo anterior fue exitoso
+    enviaCorreo($id, $txt_email, $conn);
+
+    // Confirmar transacción
+    $conn->commit();
+    echo json_encode(['codigo' => 0, 'mensaje' => 'Solicitud asignada a lista de espera correctamente']);
+} catch (Exception $e) {
+    $conn->rollback();
+    echo json_encode(['codigo' => 2, 'mensaje' => 'Error en el proceso', 'error' => $e->getMessage()]);
 }
+
+$conn->close();

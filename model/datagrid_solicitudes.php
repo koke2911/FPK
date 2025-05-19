@@ -23,7 +23,7 @@ $sql = "SELECT s.id as ID,s.nombre as NOMBRE,s.rut as RUT,s.edad as EDAD,s.email
 ifnull(s.correo,'0') as CORREO 
 from solicitudes s 
 inner join regiones r on r.codigo=s.region
-inner join comunas c on c.id=s.comuna where s.estado=$estado order by s.id desc";
+inner join comunas c on c.id=s.comuna where s.estado=$estado order by s.id asc";
 $result = $conn->query($sql);
 
 $filas = [];

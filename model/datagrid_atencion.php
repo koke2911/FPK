@@ -7,7 +7,6 @@ $password = $_SESSION['password'];
 $dbname = $_SESSION['dbname'];
 $port = $_SESSION['port'];
 
-
 $conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 if ($conn->connect_error) {
@@ -36,8 +35,10 @@ $sql = "SELECT s.id as ID,
                 where s.estado=2  and l.estado in (7) order by s.id desc";
 $result = $conn->query($sql);
 
+// print_r($result);
+
 $filas = [];
-// echo 'aqui';
+
 
 if ($result->num_rows > 0) {
 
@@ -54,10 +55,12 @@ if ($result->num_rows > 0) {
             'EMAIL' => utf8_encode($row['EMAIL']),
             'FONO' => utf8_encode($row['FONO']),
             'COMUNA' => utf8_encode($row['COMUNA']),
-            'DIRECCION' => ($row['DIRECCION']),
+            'DIRECCION' => utf8_encode($row['DIRECCION']),
             'FECHA_SOLICITUD' => utf8_encode($row['FECHA_SOLICITUD']),
-            'ESTADO' => ($row['ESTADO'])
+            'ESTADO' => utf8_encode($row['ESTADO'])
         ];
+
+        // print_r($filas);
     }
 }
 // print_r($filas);

@@ -43,13 +43,14 @@ if (empty($_SESSION)) {
                             <label for="estado">Estado</label>
                             <select id="cmb_estado" name="id=" estado"" class="form-control">
                                 <option value="0">Seleccione</option>
-                                <option value="1">Correo enviado</option>
+                                <option value="1">En Lista de Espera</option>
+                                <!-- <option value="1">Correo enviado</option> -->
                                 <option value="2">Seguimiento Whatsapp</option>
-                                <option value="3">Terapeuta designada</option>
+                                <!-- <option value="3">Terapeuta designada</option> -->
                                 <option value="4">Proceso completado</option>
                                 <option value="5">No contesto correo</option>
                                 <option value="6">No siguio el proceso</option>
-                                <option value="7">En atencion</option>
+                                <!-- <option value="7">En atencion</option> -->
                             </select>
                         </div>
                     </div>
@@ -68,7 +69,22 @@ if (empty($_SESSION)) {
         </div>
     </div>
 
-    <div class="row ">
+    <div class="row mb-3">
+        <div class="col-md-2" style="margin-left: 10px;">
+            <label for="buscadorTarjetas">Buscar:</label>
+            <input type="text" id="buscadorTarjetas" class="form-control" placeholder="Buscar solicitud...">
+        </div>
+    </div>
+
+    <div class="card shadow mb-12">
+        <div class="card-body">
+            <div id="cards_container" class="row g-3" style="max-height: 80vh; overflow-y: auto;margin-bottom: 20px;">
+                <!-- Aquí se cargarán las tarjetas dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row ">
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-12">
                 <div class="card-body">
@@ -100,7 +116,7 @@ if (empty($_SESSION)) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="../public/libreries/bootstrap-4.6/jquery-3.6.0.min.js"></script>
     <script src="../public/libreries/bootstrap-4.6/bootstrap.bundle.min.js"></script>

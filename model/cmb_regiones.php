@@ -1,19 +1,20 @@
 <?php
-session_start();
-
-$servername = $_SESSION['servername'];
-$username = $_SESSION['username'];
-$password = $_SESSION['password'];
-$dbname = $_SESSION['dbname'];
-$port = $_SESSION['port'];
+require_once('../config/database.php');
 
 
-$conn = new mysqli($servername, $username, $password, $dbname,$port);
+try {
+    $conn = new mysqli($servername, $username, $password, $dbname,$port);
+    if ($conn->connect_error) {
+        throw new Exception("Connection failed: " . $conn->connect_error);
+    }
+} catch (Exception $e) {
+    echo "Error en la conexi n: " . $e->getMessage();
+    exit();
+}
 
 $sql="SELECT * FROM regiones where estado=1";
 
 $result = $conn->query($sql);
-
 // $filas = [];
 
 if ($result->num_rows > 0) {

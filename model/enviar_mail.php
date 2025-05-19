@@ -6,6 +6,7 @@ $username = $_SESSION['username'];
 $password = $_SESSION['password'];
 $dbname = $_SESSION['dbname'];
 $port = $_SESSION['port'];
+$usuario = $_SESSION['id_usuario'];
 
 
 $id=$_POST['id'];
@@ -32,10 +33,10 @@ while ($row = $result->fetch_assoc()) {
 // print_r($filas[0]['correo']);
 // exit();
 
-if($filas[0]['correo']>0){
-    echo json_encode(['codigo' => 2, 'mensaje' => 'Ya se envio el correo a esta solicitud', 'error' => $conn->error]);
-    exit();
-}
+// if($filas[0]['correo']>0){
+//     echo json_encode(['codigo' => 2, 'mensaje' => 'Ya se envio el correo a esta solicitud', 'error' => $conn->error]);
+//     exit();
+// }
 
 
 
@@ -99,17 +100,31 @@ if ($result->num_rows > 0) {
 
                 if ($mail->send()) {
 
-                        $sql = "UPDATE solicitudes set correo=1 WHERE id={$id}";
+                        
+                        $conn->begin_transaction();
 
-                        $result = $conn->query($sql);
+                            try {
+                                // Actualizar campo correo
+                                $sql = "UPDATE solicitudes SET correo = 1 WHERE id = {$id}";
+                                if (!$conn->query($sql)) {
+                                    throw new Exception("Error en UPDATE: " . $conn->error);
+                                }
 
-                        if ($result) {
-                            echo json_encode(['codigo' => 0, 'mensaje' => 'Correo Enviado Correctamente']);
-                            exit();
-                        } else {
-                            echo json_encode(['codigo' => 2, 'mensaje' => 'Error al enviar el correo', 'error' => $conn->error]);
-                            exit();
-                        }
+                                // Insertar traza
+                                $sql2 = "INSERT INTO lista_espera_traza (id_solicitud, estado, observacion, fecha, usuario) 
+                            VALUES ($id, 9, '$observacion', NOW(), '$usuario')";
+                                if (!$conn->query($sql2)) {
+                                    throw new Exception("Error en INSERT: " . $conn->error);
+                                }
+
+                                // Todo correcto, commit
+                                $conn->commit();
+                                echo json_encode(['codigo' => 0, 'mensaje' => 'Correo Enviado Correctamente']);
+                            } catch (Exception $e) {
+                                // Si algo falla, rollback
+                                $conn->rollback();
+                                echo json_encode(['codigo' => 2, 'mensaje' => 'Error al enviar el correo', 'error' => $e->getMessage()]);
+                            }
                    
                 } else {
                     echo json_encode(['codigo' => 2, 'mensaje' => 'Error al enviar el correo', 'error' => $conn->error]);

@@ -124,6 +124,28 @@ $(document).ready(function () {
         }
     });
 
+    $("#txt_fono").keypress(function (e) {
+        var keyCode = e.which;
+        if (keyCode !== 8 && (keyCode < 48 || keyCode > 57)) {
+            e.preventDefault();
+        }
+    });
+
+
+    $("#txt_nombre").keypress(function (e) {
+        var keyCode = e.which;
+        if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122) && keyCode != 32) {
+            e.preventDefault();
+        }
+    });
+
+    $("#txt_sector").keypress(function (e) {
+        var keyCode = e.which;
+        if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122) && (keyCode < 48 || keyCode > 57) && keyCode != 32) {
+            e.preventDefault();
+        }
+    });
+
 
     $("#btn_enviar").click(function (e) {
 

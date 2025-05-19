@@ -1,7 +1,7 @@
 var id_solicitud;
 
 function verTraza(id){
-    
+    window.location.href = "../views/ver_traza.php?id=" + id;
 }
 
 
@@ -42,7 +42,7 @@ $(document).ready(function () {
                 render: function(data, type, row, meta) {
                     let color = '';
                     switch (data) {
-                        case 'Correo enviado':
+                        case 'En lista Espera':
                             color = 'yellow';
                             break;
                         case 'Seguimiento Whatsapp':
