@@ -37,9 +37,9 @@ if ($result->num_rows > 0) {
 
 
         $filas[] = [
-            'ESTADO' => utf8_encode($row['estado']),
+            'ESTADO' => ($row['estado']),
             'FECHA' => ($row['fecha']),
-            'OBSERVACION' => utf8_encode($row['observacion']),
+            'OBSERVACION' => ($row['observacion']),
             'USUARIO' => ($row['usuario'])
         ];
     }

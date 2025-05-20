@@ -58,28 +58,28 @@ if ($result->num_rows > 0) {
 
 
         $filas[] = [
-            'ID' => utf8_encode($row['ID']),
-            'ID_LE' => utf8_encode($row['ID_LE']),
-            'NOMBRE' => utf8_encode($row['NOMBRE']),
-            'RUT' => utf8_encode($row['RUT']),
+            'ID' => ($row['ID']),
+            'ID_LE' => ($row['ID_LE']),
+            'NOMBRE' => ($row['NOMBRE']),
+            'RUT' => ($row['RUT']),
             'EDAD' => ($row['EDAD']),
-            'NOMBRE_RESPONSABLE' => utf8_encode($row['NOMBRE_RESPONSABLE']),
-            'EMAIL' => utf8_encode($row['EMAIL']),
-            'FONO' => utf8_encode($row['FONO']),
-            'COMUNA' => utf8_encode($row['COMUNA']),
+            'NOMBRE_RESPONSABLE' => ($row['NOMBRE_RESPONSABLE']),
+            'EMAIL' => ($row['EMAIL']),
+            'FONO' => ($row['FONO']),
+            'COMUNA' => ($row['COMUNA']),
             'DIRECCION' => ($row['DIRECCION']),
-            'FECHA_SOLICITUD' => utf8_encode($row['FECHA_SOLICITUD']),
-            'ESTADO' => utf8_encode($row['ESTADO']),
-            'WHATSAPP' => utf8_encode($row['WHATSAPP']),
-            'REUNION' => utf8_encode($row['REUNION']),
-            'MENSUALIDAD' => utf8_encode($row['MENSUALIDAD']),
-            'SERVICIO' => utf8_encode($row['SERVICIO']),
-            'SERVICIO_ID' => utf8_encode($row['SERVICIO_ID']),
-            'PROFESIONAL_ID' => utf8_encode($row['PROFESIONAL_ID']),
-            'SESIONES_TOTALES' => utf8_encode($row['SESIONES_TOTALES']),
-            'SESIONES_ACTUALES' => utf8_encode($row['SESIONES_ACTUALES']),
-            'NOMBRE_PROFESIONAL' => utf8_encode($row['NOMBRE_PROFESIONAL']),
-            'SESIONES' => utf8_encode($row['SESIONES'])
+            'FECHA_SOLICITUD' => ($row['FECHA_SOLICITUD']),
+            'ESTADO' => ($row['ESTADO']),
+            'WHATSAPP' => ($row['WHATSAPP']),
+            'REUNION' => ($row['REUNION']),
+            'MENSUALIDAD' => ($row['MENSUALIDAD']),
+            'SERVICIO' => ($row['SERVICIO']),
+            'SERVICIO_ID' => ($row['SERVICIO_ID']),
+            'PROFESIONAL_ID' => ($row['PROFESIONAL_ID']),
+            'SESIONES_TOTALES' => ($row['SESIONES_TOTALES']),
+            'SESIONES_ACTUALES' => ($row['SESIONES_ACTUALES']),
+            'NOMBRE_PROFESIONAL' => ($row['NOMBRE_PROFESIONAL']),
+            'SESIONES' => ($row['SESIONES'])
         ];
     }
 }

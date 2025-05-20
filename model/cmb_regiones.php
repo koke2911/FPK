@@ -4,6 +4,7 @@ require_once('../config/database.php');
 
 try {
     $conn = new mysqli($servername, $username, $password, $dbname,$port);
+    $conn->set_charset("utf8mb4");
     if ($conn->connect_error) {
         throw new Exception("Connection failed: " . $conn->connect_error);
     }

@@ -44,14 +44,14 @@ if ($result->num_rows > 0) {
 
 
         $filas[] = [
-            'ID' => utf8_encode($row['ID']),
-            'RUT' => utf8_encode($row['RUT']),
-            'NOMBRE' => utf8_encode($row['NOMBRE']),
-            'APELLIDO' => utf8_encode($row['APELLIDO']),
-            'PROFESION' => utf8_encode($row['PROFESION']),
-            'PROFESION_ID' => utf8_encode($row['PROFESION_ID']),
-            'ESTADO' => utf8_encode($row['ESTADO']),
-            'ESTADO_COD' => utf8_encode($row['ESTADO_COD'])
+            'ID' => ($row['ID']),
+            'RUT' => ($row['RUT']),
+            'NOMBRE' => ($row['NOMBRE']),
+            'APELLIDO' => ($row['APELLIDO']),
+            'PROFESION' => ($row['PROFESION']),
+            'PROFESION_ID' => ($row['PROFESION_ID']),
+            'ESTADO' => ($row['ESTADO']),
+            'ESTADO_COD' => ($row['ESTADO_COD'])
         ];
     }
 }
