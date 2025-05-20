@@ -185,6 +185,14 @@ $(document).ready(function () {
     });
 
     $('#btn_guardar_estado').click(function () {
+        if ($("#cmb_estado").val() == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Debe seleccionar un estado',
+                showConfirmButton: true
+            });
+            return false;
+        }
 
         var id = $("#id_estado").val();
         var estado = $("#cmb_estado").val();

@@ -302,6 +302,15 @@ $(document).ready(function () {
         var id = $("#id_estado").val();
         var estado = $("#cmb_estado").val();
         var observacion = $("#observacion").val();
+
+        if ($("#cmb_estado").val() == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Debe seleccionar un estado',
+                showConfirmButton: true
+            });
+            return false;
+        }
         $.ajax({
             url: "../model/update_estado_le.php",
             type: "POST",

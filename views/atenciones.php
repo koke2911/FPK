@@ -42,7 +42,7 @@ if (empty($_SESSION)) {
                         <div class="col-md-12">
                             <label for="estado">Estado</label>
                             <select id="cmb_estado" name="id=" estado"" class="form-control">
-                                <option value="0">Seleccione</option>
+                                <option value="">Seleccione</option>
                                 <option value="1">En Lista de Espera</option>
                                 <!-- <option value="1">Correo enviado</option> -->
                                 <!-- <option value="2">Seguimiento Whatsapp</option> -->
