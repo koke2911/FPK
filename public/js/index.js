@@ -134,7 +134,7 @@ $(document).ready(function () {
 
     $("#txt_nombre").keypress(function (e) {
         var keyCode = e.which;
-        if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122) && keyCode != 32) {
+        if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122) && keyCode != 32 && keyCode != 164) {
             e.preventDefault();
         }
     });
