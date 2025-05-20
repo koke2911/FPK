@@ -39,7 +39,7 @@ function enviaCorreo($id, $txt_email,$conn){
     $mail = new PHPMailer();
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = $server;
         $mail->SMTPAuth = true;
         $mail->Username = $correo;
         $mail->Password = $pass;

@@ -80,7 +80,7 @@ if ($result->num_rows > 0) {
             $mail = new PHPMailer();
             try {
                 $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
+                $mail->Host = $server;
                 $mail->SMTPAuth = true;
                 $mail->Username = $correo;
                 $mail->Password = $pass;
@@ -98,6 +98,7 @@ if ($result->num_rows > 0) {
                  $mail->addAttachment('../public/document/Adicionales.pdf', 'Adicionales.pdf');
                 
 
+                // $mail->SMTPDebug = 2;
                 if ($mail->send()) {
 
                         
