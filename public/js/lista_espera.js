@@ -1,4 +1,5 @@
 var id_solicitud;
+var url_filtro='para=';
 
 function verTraza(id){
     window.location.href = "../views/ver_traza.php?id=" + id;
@@ -174,6 +175,67 @@ function LlenaSolicitudes() {
             $('#cards_container').html('<div class="alert alert-danger">Error al cargar las solicitudes</div>');
         }
     });
+}
+
+function LlenaSolicitudesFiltro(url_filtro) {
+    $.ajax({
+        url: "../model/datagrid_lista_espera.php?"+url_filtro,
+        method: "GET",
+        dataType: "json",
+        success: function (response) {
+            const container = $('#cards_container');
+            container.empty();
+
+            response.data.forEach(row => {
+
+
+                const btnAccion = `<button class="btn btn-success" onclick="cargaModal(${row.ID})" title="Cambiar estado"><i class="fa fa-book"></i></button>`;
+                const btnAsignaServicio = `<button class="btn btn-warning" onclick="asignaOpciones(${row.ID},${row.SERVICIO_ID},${row.PROFESIONAL_ID},${row.SESIONES_TOTALES},${row.SESIONES_ACTUALES})" title="Asignaciones"><i class="fa fa-hospital"></i></button>`;
+                let btnTraza = `<button class="btn btn-primary" onclick="verTraza(${row.ID})" title="Ver traza"><i class="fa fa-eye"></i></button>`;
+
+                const card = `
+                <div class="col-md-3 col-xl-3" style="margin-bottom: 20px;">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">#${row.ID} <strong>${row.NOMBRE}</strong> <br>${row.EDAD}</h5>
+                            <p class="card-text">
+                                <strong>RUT:</strong> ${row.RUT}<br>
+                                <strong>Responsable:</strong> ${row.NOMBRE_RESPONSABLE}<br>
+                                <strong>Email:</strong> ${row.EMAIL}<br>
+                                <strong>Fono:</strong> ${row.FONO}<br>
+                                <strong>Región-Comuna:</strong> ${row.COMUNA}<br>
+                                <strong>Sector:</strong> ${row.DIRECCION}<br>
+                                <strong>Fecha Solicitud:</strong> ${row.FECHA_SOLICITUD}<br>
+                                <strong>Servicio:</strong> ${row.SERVICIO}<br>
+                                <strong>Sesiones:</strong> ${row.SESIONES}<br>
+                                <strong>Terapeuta:</strong> ${row.NOMBRE_PROFESIONAL}<br>                                
+                                <i class="fab fa-whatsapp"></i><strong> Contacto Whatsapp:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'W')" ${row.WHATSAPP == 'true' ? 'checked' : ''} ><br>
+                                <i class="fas fa-video"></i><strong> Reunión OnLine:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'R')" ${row.REUNION == 'true' ? 'checked' : ''} ><br>
+                                <i class="fas fa-money-bill-wave"></i><strong> Pago mensualidad:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'M')" ${row.MENSUALIDAD == 'true' ? 'checked' : ''} ><br>
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                ${btnAccion}
+                                ${btnAsignaServicio}
+                                ${btnTraza}
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                container.append(card);
+            });
+        },
+        error: function () {
+            $('#cards_container').html('<div class="alert alert-danger">Error al cargar las solicitudes</div>');
+        }
+    });
+}
+
+function filtra(tipo,check){
+    LlenaSolicitudesFiltro(tipo,check);
 }
 
 $(document).ready(function () {
@@ -439,4 +501,36 @@ $(document).ready(function () {
         });
     });
 
+
+    $('#chk_whatsapp').change(function () {
+        if (this.checked) {
+            url_filtro += "&whatsapp=true";
+        } else {
+            url_filtro = url_filtro.replace("&whatsapp=true", "");
+        }
+        LlenaSolicitudesFiltro(url_filtro);
+    });
+
+    $('#chk_reunion').change(function () {
+        if (this.checked) {
+            url_filtro += "&reunion=true";
+        } else {
+            url_filtro = url_filtro.replace("&reunion=true", "");
+        }
+        LlenaSolicitudesFiltro(url_filtro);
+    });
+
+    $('#chk_pago').change(function () {
+        if (this.checked) {
+            url_filtro += "&mensualidad=true";
+        } else {
+            url_filtro = url_filtro.replace("&mensualidad=true", "");
+        }
+        LlenaSolicitudesFiltro(url_filtro);
+    });
+
 });
+
+// whatsapp
+// reunion
+// mensualidad

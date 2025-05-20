@@ -77,6 +77,18 @@ if (empty($_SESSION)) {
         <div class="col-md-1">
             <button type="button" class="btn btn-primary" id="btn_exportar_excel" style="margin-top: 30px"><i class="fas fa-file-excel"></i> Exportar</button>
         </div>
+        <div class="form-check form-check-inline" style="margin-top: 2%;">
+            <input class="form-check-input" type="checkbox" id="chk_whatsapp" value="1">
+            <label class="form-check-label" for="chk_whatsapp"><i class="fab fa-whatsapp"></i></label>
+        </div>
+        <div class="form-check form-check-inline" style="margin-top: 2%;">
+            <input class="form-check-input" type="checkbox" id="chk_reunion" value="1">
+            <label class="form-check-label" for="chk_reunion"><i class="fas fa-camera"></i></label>
+        </div>
+        <div class="form-check form-check-inline" style="margin-top: 2%;">
+            <input class="form-check-input" type="checkbox" id="chk_pago" value="1">
+            <label class="form-check-label" for="chk_pago"><i class="fas fa-money-bill-wave"></i></label>
+        </div>
     </div>
 
     <div class="card shadow mb-12">

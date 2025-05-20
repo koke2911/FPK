@@ -658,7 +658,7 @@
 
     <main>
         <section id="nosotros">
-            <h2>¿Quiénes Somos?</h2>
+            <h2>¿QUIÉNES SOMOS?</h2>
             <div class="nosotros-card">
                 <h3>🧸 Fonoplay Kids</h3>
                 <p>
@@ -674,7 +674,7 @@
 
 
         <section id="mision-vision">
-            <h2>Misión y Visión</h2>
+            <h2>MISIÓN Y VISIÓN</h2>
             <div class="mv-grid">
                 <div class="mv-card">
                     <h3>🎯 Misión</h3>
@@ -689,7 +689,7 @@
 
 
         <section id="servicios">
-            <h2>Servicios</h2>
+            <h2>SERVICIOS</h2>
             <div class="servicios-grid">
                 <div class="servicio-card">
                     <h3>👶 Babysitting Profesional</h3>
@@ -715,7 +715,7 @@
         </section>
 
         <section id="profesional">
-            <h2>Profesional a Cargo</h2>
+            <h2>PROFESIONAL A CARGO</h2>
             <div class="profesional-card">
                 <h3>👩‍⚕️ Javiera Paola Aliaga Aliaga</h3>
                 <p><strong>Fonoaudióloga titulada en la Universidad Mayor</strong>, con más de 10 años de experiencia en el cuidado infantil y 4 años de ejercicio profesional.</p>
@@ -725,7 +725,7 @@
 
 
         <section id="experiencia">
-            <h2>Experiencia</h2>
+            <h2>EXPERIENCIA</h2>
             <ul>
                 <li>Más de 5 años atendiendo niños con trastornos del lenguaje</li>
                 <li>Atención personalizada y adaptada a cada paciente</li>
@@ -778,16 +778,27 @@
 
 
         <section id="contacto">
-            <h2>Contacto</h2>
+            <h2>CONTACTO</h2>
             <form>
-                <input type="text" name="txt_nombre" id="txt_nombre" placeholder="Nombre y apellido del niñ@" required />
-                <input type="text" name="txt_rut" id="txt_rut" placeholder="Rut 11111111-1 del niñ@" required maxlength="10"/>
-                <input type="text" name="dt_nacimiento" id="dt_nacimiento" placeholder="Nacimiento del niñ@  dd-mm-yyyy" required maxlength="10" />
-                <input type="email" name="txt_email" id="txt_email" placeholder="Correo electrónico" required />
-                <input type="tel" name="txt_fono" id="txt_fono" placeholder="+569 " required maxlength="8" style="width: 100%;" />
-                <select class="form-control" id="cmb_region" name="cmb_region" placeholder="Región"></select>
-                <select class="form-control" id="cmb_comuna" name="cmb_comuna" placeholder="comuna"></select>
-                <input type="text" name="txt_sector" id="txt_sector" placeholder="Sector" required maxlength="200" />
+                <input type="text" name="txt_nombre" id="txt_nombre" title="Nombre y apellido del niñ@" placeholder="Nombre y apellido del niñ@" required />
+                
+                <input type="text" name="txt_rut" id="txt_rut" title="Rut 11111111-1 del niñ@" placeholder="Rut 11111111-1 del niñ@" required maxlength="10"/>
+                
+                <input type="text" name="dt_nacimiento" id="dt_nacimiento" title="Nacimiento del niñ@  dd-mm-yyyy" placeholder="Nacimiento del niñ@  dd-mm-yyyy" required maxlength="10" />
+                
+                <input type="email" name="txt_email" id="txt_email" title="Correo electrónico" placeholder="Correo electrónico" required />
+                
+                <div style="display: flex; align-items: center;">
+                    <label for="txt_fono" style="margin-right: 5px;">Teléfono +569</label>
+                    <input type="tel" name="txt_fono" id="txt_fono" title="+569" placeholder="" required maxlength="8" style="width: 100%;" />
+                </div>
+                
+                <select class="form-control" id="cmb_region" name="cmb_region" title="Región" placeholder="Región"></select>
+                
+                <select class="form-control" id="cmb_comuna" name="cmb_comuna" title="comuna" placeholder="comuna"></select>
+                
+                <label for="txt_sector">Sector</label>
+                <input type="text" name="txt_sector" id="txt_sector" title="Sector" placeholder="Sector" required maxlength="200" />
                 <button type="button" id="btn_enviar">Enviar</button>
             </form>
         </section>

@@ -24,8 +24,8 @@ if ($result->num_rows > 0) {
 
 
         $filas[] = [
-            'CODIGO' => utf8_encode($row['codigo']),
-            'NOMBRE' => utf8_encode($row['nombre'])
+            'CODIGO' => ($row['codigo']),
+            'NOMBRE' => ($row['nombre'])
             
         ];
     }

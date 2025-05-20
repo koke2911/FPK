@@ -29,9 +29,11 @@ if (empty($_SESSION)) {
 <body>
     <!-- <input type="hidden" id="estado" value=" <?php echo $estado; ?>"> -->
     <h2 class="text-center">Lista de Espera</h2>
-    <label for="observacion">Fecha LE</label>
+    <label for="observacion"></label>
     <input type="text" id="fecha_lista">
     <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button>
+
+
     <div class="modal fade" id="modal_estado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -71,42 +73,7 @@ if (empty($_SESSION)) {
             </div>
         </div>
     </div>
-    <!-- <div class="row ">
-        <div class="col-xl-12 col-lg-12">
-            <div class="card shadow mb-12">
-                <div class="card-body">
-                    <label for="observacion">Fecha lista Espera</label>
-                    <input type="text" id="fecha_lista">
-                    <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button>
-                    <div id="field_wrapper1">
-                        <div class="row">
-                            <div class="table-responsive" style="overflow-x: hidden;overflow-y:scroll;height: 80vh;padding:1em">
-                                <table class="table table-bordered" width="100%" cellspacing="0" id="grid_solicitudes">
-                                    <thead style="background: #2f2744;color: #FFF;">
-                                        <tr>
-                                            <th>#ID</th>
-                                            <th>Nombre</th>
-                                            <th>Rut</th>
-                                            <th>Edad</th>
-                                            <th>Responsable</th>
-                                            <th>email</th>
-                                            <th>Fono</th>
-                                            <th>Comuna</th>
-                                            <th>Direccion</th>
-                                            <th>Fecha</th>
-                                            <th>Estado</th>
-                                            <th>Traza</th>
 
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="row mb-3">
         <div class="col-md-2" style="margin-left: 10px;">
             <label for="buscadorTarjetas">Buscar:</label>
@@ -114,6 +81,18 @@ if (empty($_SESSION)) {
         </div>
         <div class="col-md-1">
             <button type="button" class="btn btn-primary" id="btn_exportar_excel" style="margin-top: 30px"><i class="fas fa-file-excel"></i> Exportar</button>
+        </div>
+        <div class="form-check form-check-inline" style="margin-top: 2%;">
+            <input class="form-check-input" type="checkbox" id="chk_whatsapp" value="1">
+            <label class="form-check-label" for="chk_whatsapp"><i class="fab fa-whatsapp"></i></label>
+        </div>
+        <div class="form-check form-check-inline" style="margin-top: 2%;">
+            <input class="form-check-input" type="checkbox" id="chk_reunion" value="1">
+            <label class="form-check-label" for="chk_reunion"><i class="fas fa-camera"></i></label>
+        </div>
+        <div class="form-check form-check-inline" style="margin-top: 2%;">
+            <input class="form-check-input" type="checkbox" id="chk_pago" value="1">
+            <label class="form-check-label" for="chk_pago"><i class="fas fa-money-bill-wave"></i></label>
         </div>
     </div>
 

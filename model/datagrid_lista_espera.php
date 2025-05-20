@@ -15,6 +15,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$reunion = isset($_GET['reunion']) ? ($_GET['reunion'] == 'true') : '';
+$mensualidad = isset($_GET['mensualidad']) ? ($_GET['mensualidad'] == 'true') : '';
+$whatsapp = isset($_GET['whatsapp']) ? ($_GET['whatsapp'] == 'true') : '';
+
+
 // $estado = $_GET['estado'];
 
 
@@ -47,7 +52,22 @@ $sql = "SELECT s.id as ID,
                 inner join comunas c on c.id=s.comuna
                 left join servicios se on se.id=l.servicio_id
                 left join profesionales p on p.id=l.profesional_id
-                where s.estado=2  and l.estado in (0,1,2,3,5) order by s.id asc";
+                where s.estado=2  and l.estado in (0,1,2,3,5) ";
+
+        if($whatsapp!="" && $whatsapp == 'true'){
+            $sql.= " and whatsapp='true' ";
+        }
+         if($reunion!="" && $reunion == 'true'){
+            $sql.= " and reunion='true' ";
+        }
+         if($mensualidad!="" && $mensualidad == 'true'){
+            $sql.= " and mensualidad='true' ";
+        }
+
+
+                $sql.="order by s.id asc";
+// echo $sql;
+
 $result = $conn->query($sql);
 
 $filas = [];
