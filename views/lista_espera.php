@@ -29,9 +29,9 @@ if (empty($_SESSION)) {
 <body>
     <!-- <input type="hidden" id="estado" value=" <?php echo $estado; ?>"> -->
     <h2 class="text-center">Lista de Espera</h2>
-    <label for="observacion">Fecha lista Espera</label>
-                    <input type="text" id="fecha_lista">
-                    <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button>
+    <label for="observacion">Fecha LE</label>
+    <input type="text" id="fecha_lista">
+    <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button>
     <div class="modal fade" id="modal_estado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -112,6 +112,9 @@ if (empty($_SESSION)) {
             <label for="buscadorTarjetas">Buscar:</label>
             <input type="text" id="buscadorTarjetas" class="form-control" placeholder="Buscar solicitud...">
         </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary" id="btn_exportar_excel" style="margin-top: 30px"><i class="fas fa-file-excel"></i> Exportar</button>
+        </div>
     </div>
 
     <div class="card shadow mb-12">
@@ -152,11 +155,11 @@ if (empty($_SESSION)) {
                             <label for="sesiones_actuales">Sesiones actuales</label>
                             <input type="number" id="sesiones_actuales" name="sesiones_actuales" class="form-control">
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btn_guardar_estado">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="btn_guarda_asingacion">Guardar</button>
                 </div>
             </div>
         </div>

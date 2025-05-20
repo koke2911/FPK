@@ -97,6 +97,8 @@ insert into estados_le values(12,'Contacto por Whatspapp',0);
 insert into estados_le values(13,'Registra Reunión Online',0);
 insert into estados_le values(14,'Registra Mensualidad',0);
 
+insert into estados_le values(15,'Registra Asignaciones',0);
+
 
 CREATE TABLE regiones (
     codigo CHAR(2) PRIMARY KEY,

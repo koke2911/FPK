@@ -61,7 +61,7 @@ function llenaServicios() {
 
         // console.log('---'+data);
 
-        regiones = "<option value=\"\">Seleccione un servicio</option>";
+        regiones = "";
 
         for (var i = 0; i < data.length; i++) {
             // console.log(data[i].CODIGO);
@@ -82,7 +82,7 @@ function llenaProfesionales() {
 
         // console.log('---'+data);
 
-        regiones = "<option value=\"\">Seleccione un servicio</option>";
+        regiones = "";
 
         for (var i = 0; i < data.length; i++) {
             // console.log(data[i].CODIGO);
@@ -94,8 +94,9 @@ function llenaProfesionales() {
 }
 
 function asignaOpciones(id, servicio_id, profesional_id, totales, actuales) {
-    console.log(servicio_id);
+    // console.log(servicio_id);
     // $('#modal_asignar').modal('show');
+    id_solicitud = id;
     $('#cmb_servicios').val(servicio_id);
     $('#cmb_terapeuta').val(profesional_id);
     $('#sesiones_totales').val(totales);
@@ -319,5 +320,60 @@ $(document).ready(function () {
         });
         $('#modal_estado').modal('hide');
     });
+
+    $('#btn_guarda_asingacion').click(function () {
+        var cmb_servicios =$("#cmb_servicios").val();
+        var cmb_terapeuta =$("#cmb_terapeuta").val();
+        var sesiones_totales =$("#sesiones_totales").val();
+        var sesiones_actuales =$("#sesiones_actuales").val();
+
+        var cmb_servicios_glosa = $("#cmb_servicios option:selected").text();
+        var cmb_terapeuta_glosa = $("#cmb_terapeuta option:selected").text();
+
+        $.ajax({
+            url: "../model/update_asignacion.php",
+            type: "POST",
+            dataType: 'json',
+            data: {
+                id: id_solicitud,
+                cmb_servicios: cmb_servicios,
+                cmb_terapeuta: cmb_terapeuta,
+                sesiones_totales: sesiones_totales,
+                sesiones_actuales: sesiones_actuales,
+                cmb_servicios_glosa:cmb_servicios_glosa,
+                cmb_terapeuta_glosa:cmb_terapeuta_glosa
+            },
+            success: function (data) {
+                if (data.codigo == 2) {
+                    Swal.fire({
+                        title: 'Ha ocurrido un error',
+                        text: data.mensaje,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar',
+                        timer: 1000,
+                        onClose: () => {
+                            Swal.close();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Solicitud Modificada correctamente',
+                        icon: 'success',
+                        text: data.mensaje,
+                        confirmButtonText: 'Aceptar',
+                        timer: 1000,
+                        onClose: () => {
+                            Swal.close();
+                        }
+                    });
+                    LlenaSolicitudes();
+                    $('#modal_asignar').modal('hide');
+                }
+            }
+        });
+    });
+    
+
+
 
 });

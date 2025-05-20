@@ -74,6 +74,9 @@ if (empty($_SESSION)) {
             <label for="buscadorTarjetas">Buscar:</label>
             <input type="text" id="buscadorTarjetas" class="form-control" placeholder="Buscar solicitud...">
         </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary" id="btn_exportar_excel" style="margin-top: 30px"><i class="fas fa-file-excel"></i> Exportar</button>
+        </div>
     </div>
 
     <div class="card shadow mb-12">
@@ -151,7 +154,7 @@ if (empty($_SESSION)) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btn_guardar_estado">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="btn_guarda_asingacion">Guardar</button>
                 </div>
             </div>
         </div>
