@@ -4,6 +4,7 @@ require_once('../config/database.php');
 $usuario=$_SESSION['id_usuario'];
 
 $conn = new mysqli($servername, $username, $password, $dbname,$port);
+$conn->set_charset("utf8mb4");
 
 $id = $_POST['id'];
 $estado = $_POST['estado'];

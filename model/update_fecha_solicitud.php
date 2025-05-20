@@ -3,6 +3,7 @@ session_start();
 require_once('../config/database.php');
 
 $conn = new mysqli($servername, $username, $password, $dbname,$port);
+$conn->set_charset("utf8mb4");
 
 $fecha = $_POST['fecha'];
 
