@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
             'ID' => $row['ID'],
             'NOMBRE' => $row['NOMBRE'],
             'RUT' => $row['RUT'],
-            'EDAD' => utf8_encode(str_replace('a&ntilde;os', '&ntilde;os', $row['EDAD'])),
+            'EDAD' => $row['EDAD'],
             'EMAIL' => $row['EMAIL'],
             'FONO' => $row['FONO'],
             // 'REGION' => utf8_encode($row['REGION']),
