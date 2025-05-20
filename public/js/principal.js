@@ -40,6 +40,11 @@ $(document).ready(function () {
     $('#menu_servicios').click(function () {
         $('#principal').attr('src', '../views/servicios.php');
     })
+
+    $('#menu_profesionales').click(function () {
+        $('#principal').attr('src', '../views/profesionales.php');
+    })
+
     
 
     

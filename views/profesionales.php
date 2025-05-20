@@ -26,70 +26,44 @@ if (empty($_SESSION)) {
 </head>
 
 <body>
-    <h2 class="text-center">Solicitudes Finalizadas</h2>
-
-    <div class="modal fade" id="modal_estado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificar estado de la solicitud</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="estado">Estado</label>
-                            <select id="cmb_estado" name="id=" estado"" class="form-control">
-                                <option value="0">Seleccione</option>
-                                <option value="1">En Lista de Espera</option>
-                                <!-- <option value="1">Correo enviado</option> -->
-                                <!-- <option value="2">Seguimiento Whatsapp</option> -->
-                                <!-- <option value="3">Terapeuta designada</option> -->
-                                <option value="4">Proceso completado</option>
-                                <!-- <option value="5">No contesto correo</option> -->
-                                <option value="6">No siguio el proceso</option>
-                                <option value="7">En Proceso</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="observacion">Observaci n</label>
-                            <textarea id="observacion" class="form-control" rows="3" maxlength="250"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btn_guardar_estado">Guardar</button>
-                </div>
+    <h2 class="text-center">Profesionales</h2>
+    <div style="margin: 10px;">
+        <div class="row">
+            <div class="col-md-2">
+                <label for="txt_id">ID</label>
+                <input type="text" id="txt_id" class="form-control" disabled>
             </div>
-        </div>
+            <div class="col-md-2">
+                <label for="txt_rut">RUT</label>
+                <input type="text" id="txt_rut" class="form-control" maxlength="10">
+            </div>
+            <div class="col-md-2">
+                <label for="txt_nombre">Nombre</label>
+                <input type="text" id="txt_nombre" class="form-control" maxlength="150">
+            </div>
+            <div class="col-md-2">
+                <label for="txt_apellido">Apellido</label>
+                <input type="text" id="txt_apellido" class="form-control" maxlength="150">
+            </div>
+            <div class="col-md-2">
+                <label for="cmb_profesion">Profesión</label>
+                <select id="cmb_profesion" class="form-control">
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="cmb_estado">Estado</label>
+                <select id="cmb_estado" class="form-control">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success mt-4 float-right" id="btn_guardar">Guardar</button>
+            </div>
+        </div><hr>
     </div>
 
-    <div class="modal fade" id="modal_ficha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modificar estado de la solicitud</h5> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="card shadow mb-12">
-                        <div class="card-body">
-                            <div id="cards_container" style="max-height: 80vh; overflow-y: auto;margin-bottom: 20px;">
-                                <!-- Aquí se cargarán las tarjetas dinámicamente -->
-                            </div>
-                        </div>
-                    </div>
-                </div>                   
-            </div>
-        </div>
-    </div>
 
     <div class="row ">
         <div class="col-xl-12 col-lg-12">
@@ -98,23 +72,17 @@ if (empty($_SESSION)) {
                     <div id="field_wrapper1">
                         <div class="row">
                             <div class="table-responsive" style="overflow-x: hidden;overflow-y:scroll;height: 80vh;padding:1em">
-                                <table class="table table-bordered" width="100%" cellspacing="0" id="grid_solicitudes">
+                                <table class="table table-bordered" width="100%" cellspacing="0" id="grid_profesionales">
                                     <thead style="background: #2f2744;color: #FFF;">
                                         <tr>
                                             <th>#ID</th>
-                                            <th>Nombre Niño</th>
                                             <th>Rut</th>
-                                            <th>Edad</th>
-                                            <th>Responsable</th>
-                                            <th>email</th>
-                                            <th>Fono</th>
-                                            <th>Comuna</th>
-                                            <th>Dirección</th>
-                                            <th>Fecha</th>
-                                            <th>Estado</th>
-                                            <th>Ficha</th>
-                                            <th>Traza</th>
-
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Profesion</th>
+                                            <th>Profesion_id</th>
+                                            <th>estado</th>
+                                            <th>estado_cod</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -155,7 +123,7 @@ if (empty($_SESSION)) {
     <script type="text/javascript" src="../public/libreries/js/bootstrap-select/js/bootstrap-select.min.js"></script>
 
 
-    <script type="text/javascript" src="../public/js/finalizadas.js"></script>
+    <script type="text/javascript" src="../public/js/profesionales.js"></script>
 
 </body>
 

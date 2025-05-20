@@ -23,6 +23,14 @@ VALUES ('17525457-9', 'c0e21b77a35c69aaf01cb8bb7a3f3194', 'Victor', 'Martinez Za
 
 update usuarios set clave='c0e21b77a35c69aaf01cb8bb7a3f3194' where rut='17525457-9';
 
+INSERT INTO usuarios (rut, clave, nombre, apellidos, fecha_nacimiento, contacto, email, tipo, estado, fecha_creacion)
+VALUES ('17526511-2', md5('koke_1592'), 'Jeniffer', 'Elgueta Aliaga', '1992-02-01', '975143052', 'koke1592@gmail.com', 'U', 1, now());
+
+
+INSERT INTO usuarios (rut, clave, nombre, apellidos, fecha_nacimiento, contacto, email, tipo, estado, fecha_creacion)
+VALUES ('19422595-4', md5('Lucas0170.'), 'Javiera', 'Aliaga Aliaga', '1992-02-01', '975143052', '', 'U', 1, now());
+
+
 create table solicitudes (
 id INT(10) NOT NULL AUTO_INCREMENT,
 nombre varchar(255),

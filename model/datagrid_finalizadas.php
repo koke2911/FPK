@@ -28,11 +28,23 @@ $sql = "SELECT s.id as ID,
                 ifnull(c.nombre,'-')  as COMUNA,
                 l.direccion as DIRECCION,
                 l.fecha as FECHA_SOLICITUD,
-                e.glosa as ESTADO
+                e.glosa as ESTADO,
+                IFNULL(whatsapp,false) as WHATSAPP,
+                IFNULL(reunion,false) as REUNION,
+                IFNULL(mensualidad,false) as MENSUALIDAD,
+                se.nombre as SERVICIO ,
+                IFNULL(l.servicio_id, 0) as SERVICIO_ID,
+                IFNULL(l.profesional_id, 0) as PROFESIONAL_ID,
+                IFNULL(l.sesiones_totales, 0) as SESIONES_TOTALES,
+                IFNULL(l.sesiones_actuales, 0) as SESIONES_ACTUALES,
+                concat(p.nombre,' ',p.apellido) as NOMBRE_PROFESIONAL,
+                concat(sesiones_actuales,' de ',sesiones_totales) as SESIONES
                 from solicitudes s 
                 inner join lista_espera l on l.id_solicitud=s.id
                 inner join estados_le e on e.id=l.estado
                 inner join comunas c on c.id=s.comuna
+                left join servicios se on se.id=l.servicio_id
+                left join profesionales p on p.id=l.profesional_id
                 where s.estado=2  and l.estado in (4,6) order by s.id desc";
 $result = $conn->query($sql);
 
@@ -56,7 +68,17 @@ if ($result->num_rows > 0) {
             'COMUNA' => utf8_encode($row['COMUNA']),
             'DIRECCION' => ($row['DIRECCION']),
             'FECHA_SOLICITUD' => utf8_encode($row['FECHA_SOLICITUD']),
-            'ESTADO' => utf8_encode($row['ESTADO'])
+            'ESTADO' => utf8_encode($row['ESTADO']),
+            'WHATSAPP' => utf8_encode($row['WHATSAPP']),
+            'REUNION' => utf8_encode($row['REUNION']),
+            'MENSUALIDAD' => utf8_encode($row['MENSUALIDAD']),
+            'SERVICIO' => utf8_encode($row['SERVICIO']),
+            'SERVICIO_ID' => utf8_encode($row['SERVICIO_ID']),
+            'PROFESIONAL_ID' => utf8_encode($row['PROFESIONAL_ID']),
+            'SESIONES_TOTALES' => utf8_encode($row['SESIONES_TOTALES']),
+            'SESIONES_ACTUALES' => utf8_encode($row['SESIONES_ACTUALES']),
+            'NOMBRE_PROFESIONAL' => utf8_encode($row['NOMBRE_PROFESIONAL']),
+            'SESIONES' => utf8_encode($row['SESIONES'])
         ];
     }
 }

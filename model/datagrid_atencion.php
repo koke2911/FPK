@@ -44,7 +44,7 @@ $sql = "SELECT s.id as ID,
                 inner join comunas c on c.id=s.comuna
                 left join servicios se on se.id=l.servicio_id
                 left join profesionales p on p.id=l.profesional_id
-                where s.estado=2  and l.estado in (7) order by s.id desc";
+                where s.estado=2  and l.estado in (7) order by s.id asc";
 $result = $conn->query($sql);
 
 // print_r($result);

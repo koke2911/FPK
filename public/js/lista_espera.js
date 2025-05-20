@@ -151,9 +151,9 @@ function LlenaSolicitudes() {
                                 <strong>Servicio:</strong> ${row.SERVICIO}<br>
                                 <strong>Sesiones:</strong> ${row.SESIONES}<br>
                                 <strong>Terapeuta:</strong> ${row.NOMBRE_PROFESIONAL}<br>                                
-                                <strong>Contacto Whatsapp:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'W')" ${row.WHATSAPP == 'true' ? 'checked' : ''} ><br>
-                                <strong>Reunión OnLine:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'R')" ${row.REUNION == 'true' ? 'checked' : ''} ><br>
-                                <strong>Pago mensualidad:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'M')" ${row.MENSUALIDAD == 'true' ? 'checked' : ''} ><br>
+                                <i class="fab fa-whatsapp"></i><strong> Contacto Whatsapp:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'W')" ${row.WHATSAPP == 'true' ? 'checked' : ''} ><br>
+                                <i class="fas fa-video"></i><strong> Reunión OnLine:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'R')" ${row.REUNION == 'true' ? 'checked' : ''} ><br>
+                                <i class="fas fa-money-bill-wave"></i><strong> Pago mensualidad:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'M')" ${row.MENSUALIDAD == 'true' ? 'checked' : ''} ><br>
                             </p>
                             <div class="d-flex justify-content-between">
                                 ${btnAccion}

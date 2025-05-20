@@ -4,6 +4,50 @@ function verTraza(id) {
     window.location.href = "../views/ver_traza.php?id=" + id;
 }
 
+function verFicha(data){
+    const container = $('#cards_container');
+    container.empty();
+    const btnAccion = `<button class="btn btn-success" title="Cambiar estado" disabled><i class="fa fa-book"></i></button>`;
+    const btnAsignaServicio = `<button class="btn btn-warning"  title="Asignaciones" disabled><i class="fa fa-hospital"></i></button>`;
+    let btnTraza = `<button class="btn btn-primary"  title="Ver traza" disabled><i class="fa fa-eye"></i></button>`;
+
+    const card = `
+                <div class="col-md-12 col-xl-12" style="margin-bottom: 20px;">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">#${data.ID} <strong>${data.NOMBRE}</strong> <br>${data.EDAD}</h5>
+                            <p class="card-text">
+                                <strong>RUT:</strong> ${data.RUT}<br>
+                                <strong>Responsable:</strong> ${data.NOMBRE_RESPONSABLE}<br>
+                                <strong>Email:</strong> ${data.EMAIL}<br>
+                                <strong>Fono:</strong> ${data.FONO}<br>
+                                <strong>Región-Comuna:</strong> ${data.COMUNA}<br>
+                                <strong>Sector:</strong> ${data.DIRECCION}<br>
+                                <strong>Fecha Solicitud:</strong> ${data.FECHA_SOLICITUD}<br>
+                                <strong>Servicio:</strong> ${data.SERVICIO}<br>
+                                <strong>Sesiones:</strong> ${data.SESIONES}<br>
+                                <strong>Terapeuta:</strong> ${data.NOMBRE_PROFESIONAL}<br>                                
+                                <i class="fab fa-whatsapp"></i><strong> Contacto Whatsapp:</strong> <input type="checkbox" onclick="registraCheck(${data.ID}, this.checked,'W')" ${data.WHATSAPP == 'true' ? 'checked' : ''} disabled><br>
+                                <i class="fas fa-video"></i><strong> Reunión OnLine:</strong> <input type="checkbox" onclick="registraCheck(${data.ID}, this.checked,'R')" ${data.REUNION == 'true' ? 'checked' : ''} disabled><br>
+                                <i class="fas fa-money-bill-wave"></i><strong> Pago mensualidad:</strong> <input type="checkbox" onclick="registraCheck(${data.ID}, this.checked,'M')" ${data.MENSUALIDAD == 'true' ? 'checked' : ''} disabled><br>
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                ${btnAccion}
+                                ${btnAsignaServicio}
+                                ${btnTraza}
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+    container.append(card);
+    $("#modal_ficha").modal('show');
+    
+}
+
 $(document).ready(function () {
 
 
@@ -14,15 +58,15 @@ $(document).ready(function () {
         "destroy": true,
         "ajax": "../model/datagrid_finalizadas.php",
         "columns": [
-            { "data": "ID", visible: false },            
+            { "data": "ID"},            
             { "data": "NOMBRE" },
             { "data": "RUT" },
             { "data": "EDAD" },
-            { "data": "NOMBRE_RESPONSABLE" },
-            { "data": "EMAIL" },
+            { "data": "NOMBRE_RESPONSABLE",visible:false },
+            { "data": "EMAIL",visible:false },
             { "data": "FONO" },
             { "data": "COMUNA" },
-            { "data": "DIRECCION" },
+            { "data": "DIRECCION",visible:false },
             { "data": "FECHA_SOLICITUD" },
             {
                 "data": "ESTADO",
@@ -51,6 +95,12 @@ $(document).ready(function () {
                             color = 'withe';
                     }
                     return `<span style="background-color: ${color}">${data}</span>`;
+                }
+            },
+            {
+                "data": "ID",
+                render: function (data, type, row, meta) {
+                    return '<button type="button" class="btn btn-primary ver_ficha"  title="Ver ficha"><i class="fa fa-file-text" aria-hidden="true"></i></button>';
                 }
             },
             {
@@ -120,6 +170,18 @@ $(document).ready(function () {
         var data = grid_solicitudes.row(this).data();
         id_solicitud = data.ID;
         $('#modal_estado').modal('show');
+    });
+
+
+    $('#grid_solicitudes').on('click', '.ver_ficha', function () {
+        const table = $('#grid_solicitudes').DataTable();
+
+        // Obtener la fila a la que pertenece el botón clickeado
+        const rowData = table.row($(this).closest('tr')).data();
+
+        // console.log("Fila completa:", rowData);
+
+        verFicha(rowData);
     });
 
     $('#btn_guardar_estado').click(function () {

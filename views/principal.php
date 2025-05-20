@@ -79,13 +79,10 @@ if (empty($_SESSION)) {
                 <li><button id="menu_atencion"><i class="fas fa-medkit me-2"></i> En Proceso</button></li>
                 <li><button id="menu_finish"><i class="fas fa-lock me-2"></i> Finalizados</button></li>
                 <hr>
-                <!-- <li><button id="menu_servicios"><i class="fas fa-cogs me-2"></i> Servicios</button></li> -->
-                <!-- <li><button id="menu_planes"><i class="fas fa-file-contract me-2"></i> Planes</button></li> -->
-                <li><button id="menu_terapeutas"><i class="fas fa-user-md me-2"></i> Terapeutas</button></li>
-                <!-- <li><button id="menu_agendas"><i class="fas fa-calendar-alt me-2"></i> Agendas</button></li> -->
+               
+                <li><button id="menu_profesionales"><i class="fas fa-user-md me-2"></i> Terapeutas</button></li>
                 <hr>
                 <hr>
-                <!-- <li><button id="menu_agendas"><i class="fas fa-users me-2"></i> Usuarios</button></li> -->
             </ul>
         </nav>
 
