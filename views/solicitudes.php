@@ -34,10 +34,10 @@ if (empty($_SESSION)) {
 
 <body style="overflow-x: hidden">
     <input type="hidden" id="estado" value="<?php echo $estado; ?>">
-    <!-- <h2 class="text-center">Solicitudes <?php echo $glosa_estado; ?></h2> -->
+    <h2 class="text-center">Solicitudes <?php echo $glosa_estado; ?></h2>
 
     <div class="row xs-12">
-        <div class="col-md-12" ">
+        <div class="col-md-2" >
             <label for="buscadorTarjetas">Buscar:</label>
             <input type="text" id="buscadorTarjetas" class="form-control" placeholder="Buscar solicitud...">
         </div>

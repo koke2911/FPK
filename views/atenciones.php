@@ -45,10 +45,10 @@ if (empty($_SESSION)) {
                                 <option value="0">Seleccione</option>
                                 <option value="1">En Lista de Espera</option>
                                 <!-- <option value="1">Correo enviado</option> -->
-                                <option value="2">Seguimiento Whatsapp</option>
+                                <!-- <option value="2">Seguimiento Whatsapp</option> -->
                                 <!-- <option value="3">Terapeuta designada</option> -->
                                 <option value="4">Proceso completado</option>
-                                <option value="5">No contesto correo</option>
+                                <!-- <option value="5">No contesto correo</option> -->
                                 <option value="6">No siguio el proceso</option>
                                 <!-- <option value="7">En atencion</option> -->
                             </select>
@@ -117,6 +117,45 @@ if (empty($_SESSION)) {
             </div>
         </div>
     </div> -->
+
+    <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Asignaciones a solicitud</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="cmb_servicios">Servicios</label>
+                            <select id="cmb_servicios" name="cmb_servicios" class="form-control"></select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cmb_terapeuta">Terapeuta</label>
+                            <select id="cmb_terapeuta" name="cmb_terapeuta" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="sesiones_totales">Sesiones totales</label>
+                            <input type="number" id="sesiones_totales" name="sesiones_totales" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sesiones_actuales">Sesiones actuales</label>
+                            <input type="number" id="sesiones_actuales" name="sesiones_actuales" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btn_guardar_estado">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../public/libreries/bootstrap-4.6/jquery-3.6.0.min.js"></script>
     <script src="../public/libreries/bootstrap-4.6/bootstrap.bundle.min.js"></script>

@@ -45,7 +45,7 @@ if (empty($_SESSION)) {
                                 <option value="0">Seleccione</option>
                                 <option value="1">En Lista de Espera</option>
                                 <!-- <option value="1">Correo enviado</option> -->
-                                <option value="2">Seguimiento Whatsapp</option>
+                                <!-- <option value="2">Seguimiento Whatsapp</option> -->
                                 <!-- <option value="3">Terapeuta designada</option> -->
                                 <option value="4">Proceso completado</option>
                                 <!-- <option value="5">No contesto correo</option> -->

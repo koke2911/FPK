@@ -29,6 +29,9 @@ if (empty($_SESSION)) {
 <body>
     <!-- <input type="hidden" id="estado" value=" <?php echo $estado; ?>"> -->
     <h2 class="text-center">Lista de Espera</h2>
+    <label for="observacion">Fecha lista Espera</label>
+                    <input type="text" id="fecha_lista">
+                    <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button>
     <div class="modal fade" id="modal_estado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -44,8 +47,8 @@ if (empty($_SESSION)) {
                             <label for="estado">Estado</label>
                             <select id="cmb_estado" name="id=" estado"" class="form-control">
                                 <option value="0">Seleccione</option>
-                                <option value="1">En Lista de Espera</option>
-                                <option value="2">Seguimiento Whatsapp</option>
+                                <!-- <option value="1">En Lista de Espera</option> -->
+                                <!-- <option value="2">Seguimiento Whatsapp</option> -->
                                 <!-- <option value="3">Terapeuta designada</option> -->
                                 <option value="4">Proceso completado</option>
                                 <!-- <option value="5">No contesto correo</option> -->
@@ -68,7 +71,7 @@ if (empty($_SESSION)) {
             </div>
         </div>
     </div>
-    <div class="row ">
+    <!-- <div class="row ">
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-12">
                 <div class="card-body">
@@ -100,6 +103,60 @@ if (empty($_SESSION)) {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row mb-3">
+        <div class="col-md-2" style="margin-left: 10px;">
+            <label for="buscadorTarjetas">Buscar:</label>
+            <input type="text" id="buscadorTarjetas" class="form-control" placeholder="Buscar solicitud...">
+        </div>
+    </div>
+
+    <div class="card shadow mb-12">
+        <div class="card-body">
+            <div id="cards_container" class="row g-3" style="max-height: 80vh; overflow-y: auto;margin-bottom: 20px;">
+                <!-- Aquí se cargarán las tarjetas dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Asignaciones a solicitud</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="cmb_servicios">Servicios</label>
+                            <select id="cmb_servicios" name="cmb_servicios" class="form-control"></select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cmb_terapeuta">Terapeuta</label>
+                            <select id="cmb_terapeuta" name="cmb_terapeuta" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="sesiones_totales">Sesiones totales</label>
+                            <input type="number" id="sesiones_totales" name="sesiones_totales" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sesiones_actuales">Sesiones actuales</label>
+                            <input type="number" id="sesiones_actuales" name="sesiones_actuales" class="form-control">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btn_guardar_estado">Guardar</button>
                 </div>
             </div>
         </div>

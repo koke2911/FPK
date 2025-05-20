@@ -22,6 +22,27 @@ function LlenaDatos(id){
     });
 }
 
+function llenaServicios() {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "model/data_servicios.php",
+    }).done(function (data) {
+        $("#cmb_servicio").html('');
+
+        // console.log('---'+data);
+
+        regiones = "<option value=\"\">Seleccione un servicio</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            // console.log(data[i].CODIGO);
+            regiones += "<option value=\"" + data[i].id + "\">" + data[i].nombre + "</option>";
+        }
+
+        $("#cmb_servicio").append(regiones);
+    });
+}
+
 
 function enviaValidacion(){
     var txt_nombre = $("#txt_nombre").val();
@@ -31,6 +52,7 @@ function enviaValidacion(){
     var txt_nombre_adulto = $("#txt_nombre_adulto").val();
     var txt_fono = $("#txt_fono").val();
     var txt_email = $("#txt_email").val();
+    let cmb_servicio = $("#cmb_servicio").val();
 
     var datos={
         id:id,
@@ -40,7 +62,8 @@ function enviaValidacion(){
         txt_direccion:txt_direccion,
         txt_nombre_adulto:txt_nombre_adulto,
         txt_fono:txt_fono,
-        txt_email:txt_email
+        txt_email:txt_email,
+        cmb_servicio: cmb_servicio
     };
 
     Swal.fire({
@@ -81,6 +104,7 @@ function enviaValidacion(){
                 $("#txt_nombre_adulto").prop('disabled', true);
                 $("#txt_fono").prop('disabled', true);
                 $("#txt_email").prop('disabled', true);
+                $("#btn_enviar").prop('disabled', true); // Desactivar el botón btn_enviar
             }
         }
     });
@@ -92,6 +116,7 @@ function enviaValidacion(){
 $(document).ready(function () {
 
     LlenaDatos(id);
+    llenaServicios();
 
     // Add input validation for txt_direccion and txt_nombre_adulto
     $("#txt_direccion, #txt_nombre_adulto").on("input", function () {
@@ -103,11 +128,12 @@ $(document).ready(function () {
         let txt_direccion = $("#txt_direccion").val();
         let txt_nombre_adulto = $("#txt_nombre_adulto").val();
         let txt_fono = $("#txt_fono").val();
+        let cmb_servicio = $("#cmb_servicio").val();
 
-        if (txt_direccion.trim() === "" || txt_nombre_adulto.trim() === "" || txt_fono.trim() === "") {
+        if (txt_direccion.trim() === "" || txt_nombre_adulto.trim() === "" || txt_fono.trim() === "" || cmb_servicio.trim() === "") {
             Swal.fire({
                 title: 'Campos vacíos',
-                text: 'Por favor, asegúrese de que los campos Dirección, Nombre Adulto y Fono no estén vacíos.',
+                text: 'Por favor, asegúrese de que los campos Dirección, Nombre Adulto y Fono no estén vacíos ademas del servicio.',
                 icon: 'warning',
                 confirmButtonText: 'Aceptar'
             });

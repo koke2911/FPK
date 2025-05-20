@@ -14,6 +14,7 @@ $txt_direccion = $_POST['txt_direccion'];
 $txt_nombre_adulto = $_POST['txt_nombre_adulto'];
 $txt_fono = $_POST['txt_fono'];
 $txt_email = $_POST['txt_email'];
+$cmb_servicio=$_POST['cmb_servicio'];
 
 require("../public/libreries/PHPMailer/src/PHPMailer.php");
 require("../public/libreries/PHPMailer/src/SMTP.php");
@@ -137,8 +138,8 @@ $conn->begin_transaction();
 
 try {
     // Insertar en lista_espera
-    $sqlInsert = "INSERT INTO lista_espera (id_solicitud, nombre_responsable, fono, direccion, fecha, estado)
-                  VALUES ($id, '$txt_nombre_adulto', '$txt_fono', '$txt_direccion', NOW(), 1)";
+    $sqlInsert = "INSERT INTO lista_espera (id_solicitud, nombre_responsable, fono, direccion, fecha, estado,servicio_id)
+                  VALUES ($id, '$txt_nombre_adulto', '$txt_fono', '$txt_direccion', NOW(), 1,$cmb_servicio)";
     if (!$conn->query($sqlInsert)) {
         throw new Exception("Error al insertar en lista_espera: " . $conn->error);
     }

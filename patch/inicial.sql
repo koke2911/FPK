@@ -56,6 +56,10 @@ estado int(10),
  PRIMARY KEY (id)
 );
 
+alter table lista_espera add ( whatsapp varchar(6),reunion varchar(6),mensualidad varchar(6));
+alter table lista_espera add servicio_id int(10);
+alter table lista_espera add (profesional_id int(10),sesiones_totales int(10), sesiones_actuales int(10));
+
 
 
 create table lista_espera_traza (
@@ -88,6 +92,10 @@ insert into estados_le values(8,'Solicitud Recibida',0);
 insert into estados_le values(9,'Correo enviado',0);
 insert into estados_le values(10,'Solicitud Rechazada',0);
 insert into estados_le values(11,'Re-abre Solicitud',0);
+
+insert into estados_le values(12,'Contacto por Whatspapp',0);
+insert into estados_le values(13,'Registra Reunión Online',0);
+insert into estados_le values(14,'Registra Mensualidad',0);
 
 
 CREATE TABLE regiones (
@@ -226,3 +234,47 @@ create table fecha_lista (
 fecha varchar(120));
 
 insert into fecha_lista values('30 de Mayo 2025');
+
+-- ******************SERVICIOOOOOOS REVISAR BIEN ESTOOOOOO ****************************
+
+-- 5-- . servicios
+
+CREATE TABLE servicios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,    
+    estado INT DEFAULT 1
+);
+-- Servicios disponibles
+INSERT INTO servicios (nombre, descripcion) VALUES ('Taller Personalizado',  NULL);
+INSERT INTO servicios (nombre, descripcion) VALUES ('Babysitting Profesional',  NULL);
+INSERT INTO servicios (nombre, descripcion) VALUES ('Terapias Profesionales',  NULL);
+INSERT INTO servicios (nombre, descripcion) VALUES ('Playgroup',  NULL);
+INSERT INTO servicios (nombre, descripcion) VALUES ('Couching a los Padres',  NULL);
+INSERT INTO servicios (nombre, descripcion) VALUES ('Plan Hermanos',  NULL);
+
+
+ --  PROFESIONES Y PROFESIONALES
+ create table profesiones (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nombre varchar(150),
+ estado int(10));
+ 
+
+
+ insert into profesiones (nombre, estado)values('Fonoaudióloga',1);
+ insert into profesiones (nombre, estado) values('Terapeuta Ocupacional',1);
+ insert into profesiones (nombre, estado)values('Kinesiologa',1);
+
+  create table profesionales(
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ rut varchar(12),
+ nombre varchar(150),
+ apellido varchar(150),
+ profesion_id int(10),
+ estado int(10) 
+ );
+
+
+insert into profesionales (rut,nombre,apellido,profesion_id,estado) values('22222222-2','Javiera','Aliaga Aliaga',1,1);
+insert into profesionales (rut,nombre,apellido,profesion_id,estado) values('17525457-9','Victoria','Martinez Zamora',3,1);

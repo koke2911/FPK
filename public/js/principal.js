@@ -36,6 +36,10 @@ $(document).ready(function () {
     $('#menu_atencion').click(function () {
         $('#principal').attr('src', '../views/atenciones.php');
     })
+
+    $('#menu_servicios').click(function () {
+        $('#principal').attr('src', '../views/servicios.php');
+    })
     
 
     

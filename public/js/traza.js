@@ -18,6 +18,8 @@ $(document).ready(function () {
             { "data": "USUARIO" }
 
         ],
+        "order": [[ 1, "desc" ]],
+        
         "select": {
             "style": "single"
         },

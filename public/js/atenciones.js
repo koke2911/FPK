@@ -9,6 +9,100 @@ function cargaModal(ID){
         $('#modal_estado').modal('show');
 }
 
+function registraCheck(id, checked, tipo) { // W R M
+
+    $.ajax({
+        url: "../model/registra_check.php",
+        type: "POST",
+        dataType: 'json',
+        data: {
+            id: id,
+            checked: checked,
+            tipo: tipo
+        },
+        success: function (data) {
+            if (data.codigo == 2) {
+                Swal.fire({
+                    title: 'Ha ocurrido un error',
+                    text: data.mensaje,
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar',
+                    timer: 1000,
+                    onClose: () => {
+                        Swal.close();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'accion registrada',
+                    icon: 'success',
+                    text: data.mensaje,
+                    confirmButtonText: 'Aceptar',
+                    timer: 1000,
+                    onClose: () => {
+                        Swal.close();
+                    }                
+                });
+                LlenaSolicitudes();
+                // $("#grid_solicitudes").dataTable().fnReloadAjax("../model/datagrid_solicitudes.php?estado=" + estado);
+            }
+        }
+    });
+
+}
+
+function llenaServicios() {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "../model/data_servicios.php",
+    }).done(function (data) {
+        $("#cmb_servicios").html('');
+
+        // console.log('---'+data);
+
+        regiones = "<option value=\"\">Seleccione un servicio</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            // console.log(data[i].CODIGO);
+            regiones += "<option value=\"" + data[i].id + "\">" + data[i].nombre + "</option>";
+        }
+
+        $("#cmb_servicios").append(regiones);
+    });
+}
+
+function llenaProfesionales() {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "../model/data_profesionales.php",
+    }).done(function (data) {
+        $("#cmb_terapeuta").html('');
+
+        // console.log('---'+data);
+
+        regiones = "<option value=\"\">Seleccione un servicio</option>";
+
+        for (var i = 0; i < data.length; i++) {
+            // console.log(data[i].CODIGO);
+            regiones += "<option value=\"" + data[i].id + "\">" + data[i].nombre + "</option>";
+        }
+
+        $("#cmb_terapeuta").append(regiones);
+    });
+}
+
+function asignaOpciones(id, servicio_id, profesional_id, totales, actuales) {
+    console.log(servicio_id);
+    // $('#modal_asignar').modal('show');
+    $('#cmb_servicios').val(servicio_id);
+    $('#cmb_terapeuta').val(profesional_id);
+    $('#sesiones_totales').val(totales);
+    $('#sesiones_actuales').val(actuales);
+    $('#modal_asignar').modal('show');
+}
+
 function LlenaSolicitudes() {
     $.ajax({
         url: "../model/datagrid_atencion.php",
@@ -21,9 +115,8 @@ function LlenaSolicitudes() {
             response.data.forEach(row => {
                
 
-                const btnAccion = `<button class="btn btn-success" onclick="cargaModal(${row.ID})" title="Cambiar estado"><i class="fa fa-book"></i></button>`;  
-                const btnAsignaTera = `<button class="btn btn-secondary" onclick="asignaTerapeuta(${row.ID})" title="Asignar terapeuta"><i class="fa fa-user"></i></button>`;                
-                const btnAsignaServicio = `<button class="btn btn-warning" onclick="asignaTerapeuta(${row.ID})" title="Asignar servicio"><i class="fa fa-hospital"></i></button>`;                
+                const btnAccion = `<button class="btn btn-success" onclick="cargaModal(${row.ID})" title="Cambiar estado"><i class="fa fa-book"></i></button>`;
+                const btnAsignaServicio = `<button class="btn btn-warning" onclick="asignaOpciones(${row.ID},${row.SERVICIO_ID},${row.PROFESIONAL_ID},${row.SESIONES_TOTALES},${row.SESIONES_ACTUALES})" title="Asignaciones"><i class="fa fa-hospital"></i></button>`;
                 let btnTraza = `<button class="btn btn-primary" onclick="verTraza(${row.ID})" title="Ver traza"><i class="fa fa-eye"></i></button>`;
                     
 
@@ -40,13 +133,15 @@ function LlenaSolicitudes() {
                                 <strong>Región-Comuna:</strong> ${row.COMUNA}<br>
                                 <strong>Sector:</strong> ${row.DIRECCION}<br>
                                 <strong>Fecha Solicitud:</strong> ${row.FECHA_SOLICITUD}<br>
-                                <strong>Servicio:</strong> <br>
-                                <strong>Sesiones:</strong> <br>
-                                <strong>Terapeuta:</strong> <br>
+                                <strong>Servicio:</strong> ${row.SERVICIO}<br>
+                                <strong>Sesiones:</strong> ${row.SESIONES}<br>
+                                <strong>Terapeuta:</strong> ${row.NOMBRE_PROFESIONAL}<br>  
+                                <strong>Contacto Whatsapp:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'W')" ${row.WHATSAPP == 'true' ? 'checked' : ''} ><br>
+                                <strong>Reunión OnLine:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'R')" ${row.REUNION == 'true' ? 'checked' : ''} ><br>
+                                <strong>Pago mensualidad:</strong> <input type="checkbox" onclick="registraCheck(${row.ID}, this.checked,'M')" ${row.MENSUALIDAD == 'true' ? 'checked' : ''} ><br>
                             </p>
                             <div class="d-flex justify-content-between">
                                 ${btnAccion}
-                                ${btnAsignaTera}
                                 ${btnAsignaServicio}
                                 ${btnTraza}
                                 
@@ -68,6 +163,8 @@ function LlenaSolicitudes() {
 $(document).ready(function () {
 
     LlenaSolicitudes(estado);
+    llenaServicios();
+    llenaProfesionales();
 
     // var grid_solicitudes = $('#grid_solicitudes').DataTable({
     //     "responsive": true,

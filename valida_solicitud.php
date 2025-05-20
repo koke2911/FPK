@@ -263,10 +263,11 @@ $id = $_GET['id'];
                 gap: 1rem;
             }
 
-            .footer{
+            .footer {
                 font-size: 0.8em;
             }
-            h2{
+
+            h2 {
                 margin-top: 2em;
             }
         }
@@ -298,8 +299,9 @@ $id = $_GET['id'];
                 <input type="text" name="txt_nombre" id="txt_nombre" placeholder="Nombre del niño o niña" required disabled />
                 <input type="text" name="txt_edad" id="txt_edad" placeholder="Edad del niño o niña" required maxlength="10" disabled />
                 <input type="text" name="txt_rut" id="txt_rut" placeholder="RUT del niño o niña" required disabled />
-                <input type="text" name="txt_direccion" style="border-color:red;" id="txt_direccion" placeholder="Dirección completa" required maxlength="150"/>
-                <input type="text" name="txt_nombre_adulto" style="border-color:red;" id="txt_nombre_adulto" placeholder="Nombre del adulto responsable" required maxlength="150"/>
+                <input type="text" name="txt_direccion" style="border-color:red;" id="txt_direccion" placeholder="Dirección completa" required maxlength="150" />
+                <input type="text" name="txt_nombre_adulto" style="border-color:red;" id="txt_nombre_adulto" placeholder="Nombre del adulto responsable" required maxlength="150" />
+                <select class="form-control" id="cmb_servicio" name="cmb_servicio" placeholder="Servicio"></select>
                 <input type="tel" name="txt_fono" id="txt_fono" placeholder="Teléfono de contacto +569" required maxlength="8" />
                 <input type="email" name="txt_email" id="txt_email" placeholder="Correo electrónico" required disabled />
 
