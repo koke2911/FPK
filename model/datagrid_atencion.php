@@ -37,8 +37,8 @@ $sql = "SELECT s.id as ID,
                 IFNULL(l.profesional_id, 0) as PROFESIONAL_ID,
                 IFNULL(l.sesiones_totales, 0) as SESIONES_TOTALES,
                 IFNULL(l.sesiones_actuales, 0) as SESIONES_ACTUALES,
-                concat(p.nombre,' ',p.apellido) as NOMBRE_PROFESIONAL,
-                concat(sesiones_actuales,' de ',sesiones_totales) as SESIONES
+                IFNULL(concat(p.nombre,' ',p.apellido),'-') as NOMBRE_PROFESIONAL,
+                IFNULL(concat(sesiones_actuales,' de ',sesiones_totales),'-') as SESIONES
                 from solicitudes s 
                 inner join lista_espera l on l.id_solicitud=s.id
                 inner join estados_le e on e.id=l.estado
