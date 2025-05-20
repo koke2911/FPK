@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
             'ID' => utf8_encode($row['ID']),
             'NOMBRE' => ($row['NOMBRE']),
             'RUT' => utf8_encode($row['RUT']),
-            'EDAD' => utf8_encode($row['EDAD']),
+            'EDAD' => ($row['EDAD']),
             'EMAIL' => utf8_encode($row['EMAIL']),
             'FONO' => utf8_encode($row['FONO']),
             'REGION' => ($row['REGION']) .' - '. $row['COMUNA'],

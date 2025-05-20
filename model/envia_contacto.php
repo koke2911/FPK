@@ -21,7 +21,7 @@ $anos = $interval->format('%y');
 $meses = $interval->format('%m');
 $dias = $interval->format('%d');
 
-$edad = $anos . ' años ' . $meses . ' meses ' ;
+$edad = $anos . ' a&ntilde;os ' . $meses . ' meses ' ;
 
 // echo $edad;
 // exit();
