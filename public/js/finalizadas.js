@@ -58,15 +58,15 @@ $(document).ready(function () {
         "destroy": true,
         "ajax": "../model/datagrid_finalizadas.php",
         "columns": [
-            { "data": "ID"},            
+            { "data": "ID" },
             { "data": "NOMBRE" },
             { "data": "RUT" },
             { "data": "EDAD" },
-            { "data": "NOMBRE_RESPONSABLE",visible:false },
-            { "data": "EMAIL",visible:false },
+            { "data": "NOMBRE_RESPONSABLE", visible: false },
+            { "data": "EMAIL", visible: false },
             { "data": "FONO" },
             { "data": "COMUNA" },
-            { "data": "DIRECCION",visible:false },
+            { "data": "DIRECCION", visible: false },
             { "data": "FECHA_SOLICITUD" },
             {
                 "data": "ESTADO",
@@ -110,7 +110,25 @@ $(document).ready(function () {
                 }
             },
 
+            // Columnas adicionales ocultas
+            { "data": "SERVICIO", visible: false },
+            { "data": "SESIONES", visible: false },
+            { "data": "NOMBRE_PROFESIONAL", visible: false },
+            {
+                "data": "WHATSAPP",
+                visible: false
+            },
+            {
+                "data": "REUNION",
+                visible: false
+            },
+            {
+                "data": "MENSUALIDAD",
+                visible: false
+                
+            }
         ],
+
         "select": {
             "style": "single"
         },
@@ -121,14 +139,14 @@ $(document).ready(function () {
                 text: '<i class="fas fa-file-excel"></i> Excel',
                 titleAttr: 'Exportar a Excel',
                 className: 'btn btn-success',
-                title: 'solicitudes en lista de espera'
+                title: 'solicitudes Finalizadas'
             },
             {
                 extend: 'pdfHtml5',
                 text: '<i class="fas fa-file-pdf"></i> PDF',
                 titleAttr: 'Exportar a PDF',
                 className: 'btn btn-danger',
-                title: 'solicitudes en lista de espera',
+                title: 'solicitudes Finalizadas',
                 orientation: 'portrait',
                 pageSize: 'LETTER'
             },

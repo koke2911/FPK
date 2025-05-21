@@ -3,6 +3,7 @@ session_start();
 
 $rut_usuario = $_SESSION['rut_usuario'];
 $nombre_usuario = $_SESSION['nombre_usuario'];
+// $estado = $_GET['estado'];
 
 if (empty($_SESSION)) {
     header("Location: ../index.php");
@@ -26,7 +27,12 @@ if (empty($_SESSION)) {
 </head>
 
 <body>
-    <h2 class="text-center">Solicitudes en atención</h2>
+    <!-- <input type="hidden" id="estado" value=" <?php echo $estado; ?>"> -->
+    <h2 class="text-center">En proceso</h2>
+    <!-- <label for="observacion"></label> -->
+    <!-- <input type="text" id="fecha_lista"> -->
+    <!-- <button type="button" class="btn btn-info" id="btn_actualizar_fecha">Actualizar</button> -->
+
 
     <div class="modal fade" id="modal_estado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -43,20 +49,19 @@ if (empty($_SESSION)) {
                             <label for="estado">Estado</label>
                             <select id="cmb_estado" name="id=" estado"" class="form-control">
                                 <option value="">Seleccione</option>
-                                <option value="1">En Lista de Espera</option>
-                                <!-- <option value="1">Correo enviado</option> -->
+                                <!-- <option value="1">En Lista de Espera</option> -->
                                 <!-- <option value="2">Seguimiento Whatsapp</option> -->
                                 <!-- <option value="3">Terapeuta designada</option> -->
                                 <option value="4">Proceso completado</option>
                                 <!-- <option value="5">No contesto correo</option> -->
                                 <option value="6">No siguio el proceso</option>
-                                <!-- <option value="7">En atencion</option> -->
+                                <option value="7">En Proceso</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="observacion">Observaci n</label>
+                            <label for="observacion">Observación</label>
                             <textarea id="observacion" class="form-control" rows="3" maxlength="250"></textarea>
                         </div>
                     </div>
@@ -74,64 +79,101 @@ if (empty($_SESSION)) {
             <label for="buscadorTarjetas">Buscar:</label>
             <input type="text" id="buscadorTarjetas" class="form-control" placeholder="Buscar solicitud...">
         </div>
-        <div class="col-md-1">
-            <button type="button" class="btn btn-primary" id="btn_exportar_excel" style="margin-top: 30px"><i class="fas fa-file-excel"></i> Exportar</button>
-        </div>
-        <div class="form-check form-check-inline" style="margin-top: 2%;">
-            <input class="form-check-input" type="checkbox" id="chk_whatsapp" value="1">
-            <label class="form-check-label" for="chk_whatsapp"><i class="fab fa-whatsapp"></i></label>
-        </div>
-        <div class="form-check form-check-inline" style="margin-top: 2%;">
-            <input class="form-check-input" type="checkbox" id="chk_reunion" value="1">
-            <label class="form-check-label" for="chk_reunion"><i class="fas fa-camera"></i></label>
-        </div>
-        <div class="form-check form-check-inline" style="margin-top: 2%;">
-            <input class="form-check-input" type="checkbox" id="chk_pago" value="1">
-            <label class="form-check-label" for="chk_pago"><i class="fas fa-money-bill-wave"></i></label>
-        </div>
+       
     </div>
 
-    <div class="card shadow mb-12">
-        <div class="card-body">
-            <div id="cards_container" class="row g-3" style="max-height: 80vh; overflow-y: auto;margin-bottom: 20px;">
-                <!-- Aquí se cargarán las tarjetas dinámicamente -->
-            </div>
+    <div class="row mb-3">
+        <div class="col-md-2">
+            <label for="cmb_whatsapp">Whatsapp</label>
+            <select id="cmb_whatsapp" name="cmb_whatsapp" class="form-control">
+                <option value=""></option>
+                <option value="1">Contactado</option>
+                <option value="0">No Contactado</option>
+            </select>
         </div>
+        <div class="col-md-2">
+            <label for="cmb_reunion">Reunion</label>
+            <select id="cmb_reunion" name="cmb_reunion" class="form-control">
+                <option value=""></option>
+                <option value="1">Realizada</option>
+                <option value="0">No Realizada</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="cmb_pago">Pago</label>
+            <select id="cmb_pago" name="cmb_pago" class="form-control">
+                <option value=""></option>
+                <option value="1">Pagado</option>
+                <option value="0">No Pagado</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="cmb_profesional">Profesional asignado</label>
+            <select id="cmb_profesional" name="cmb_profesional" class="form-control">
+                
+            </select>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button type="button" class="btn btn-secondary" id="btn_limpiar">Limpiar</button>
+        </div>
+       
     </div>
 
-    <!-- <div class="row ">
-        <div class="col-xl-12 col-lg-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="tarjetas-tab" data-toggle="tab" href="#tarjetas" role="tab" aria-controls="tarjetas" aria-selected="true">Tarjetas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tabla-tab" data-toggle="tab" href="#tabla" role="tab" aria-controls="tabla" aria-selected="false">Lista</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="tarjetas" role="tabpanel" aria-labelledby="tarjetas-tab">
             <div class="card shadow mb-12">
                 <div class="card-body">
-                    <div id="field_wrapper1">
-                        <div class="row">
-                            <div class="table-responsive" style="overflow-x: hidden;overflow-y:scroll;height: 80vh;padding:1em">
-                                <table class="table table-bordered" width="100%" cellspacing="0" id="grid_solicitudes">
-                                    <thead style="background: #2f2744;color: #FFF;">
-                                        <tr>
-                                            <th>#ID</th>
-                                            <th>Nombre</th>
-                                            <th>Rut</th>
-                                            <th>Edad</th>
-                                            <th>Responsable</th>
-                                            <th>email</th>
-                                            <th>Fono</th>
-                                            <th>Comuna</th>
-                                            <th>Dirección</th>
-                                            <th>Fecha</th>
-                                            <th>Estado</th>
-                                            <th>Traza</th>
-
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
+                    <div id="cards_container" class="row g-3" style="max-height: 80vh; overflow-y: auto;margin-bottom: 20px;">
+                        <!-- Aquí se cargarán las tarjetas dinámicamente -->
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+        <div class="tab-pane fade" id="tabla" role="tabpanel" aria-labelledby="tabla-tab">
+            <div class="card shadow mb-12">
+                <div class="card-body">
+                    
+                <div class="table-responsive" style="overflow-x: hidden;overflow-y:scroll;height: 80vh;padding:1em">
+                    <table class="table table-bordered" width="100%" cellspacing="0" id="datatable">
+                        <thead style="background: #2f2744;color: #FFF;">
+                        
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>RUT</th>
+                                <th>Responsable</th>
+                                <th>Email</th>
+                                <th>Fono</th>
+                                <th>Región-Comuna</th>
+                                <th>Sector</th>
+                                <th>Fecha Solicitud</th>
+                                <th>Servicio</th>
+                                <th>Sesiones</th>
+                                <th>Terapeuta</th>
+                                <th>Contacto Whatsapp</th>
+                                <th>Reunión OnLine</th>
+                                <th>Pago mensualidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -172,6 +214,31 @@ if (empty($_SESSION)) {
         </div>
     </div>
 
+    <div class="modal fade" id="modal_ficha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modificar estado de la solicitud</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card shadow mb-12">
+                        <div class="card-body">
+                            <div id="cards_containerL" style="max-height: 80vh; overflow-y: auto;margin-bottom: 20px;">
+                                <!-- Aquí se cargarán las tarjetas dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
+            </div>
+        </div>
+    </div>
+   
+
+    
+
     <script src="../public/libreries/bootstrap-4.6/jquery-3.6.0.min.js"></script>
     <script src="../public/libreries/bootstrap-4.6/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../public/libreries/vendor/datepicker/moment.min.js"></script>
@@ -189,6 +256,11 @@ if (empty($_SESSION)) {
     <script type="text/javascript" src="../public/libreries/vendor/datatables/jszip.min.js"></script>
     <script type="text/javascript" src="../public/libreries/vendor/datatables/pdfmake.min.js"></script>
     <script type="text/javascript" src="../public/libreries/vendor/datatables/vfs_fonts.js"></script>
+
+
+
+
+
 
     <script type="text/javascript" src="../public/libreries/vendor/datatables/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="../public/libreries/js/fnReloadAjax.js"></script>

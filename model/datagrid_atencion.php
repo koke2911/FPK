@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 
 $servername = $_SESSION['servername'];
 $username = $_SESSION['username'];
@@ -14,10 +15,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$reunion = isset($_GET['reunion']) ? ($_GET['reunion'] == 'true') : '';
-$mensualidad = isset($_GET['mensualidad']) ? ($_GET['mensualidad'] == 'true') : '';
-$whatsapp = isset($_GET['whatsapp']) ? ($_GET['whatsapp'] == 'true') : '';
-
+$cmb_whatsapp = $_GET['cmb_whatsapp'];
+$cmb_reunion = $_GET['cmb_reunion'];
+$cmb_pago = $_GET['cmb_pago'];
+$cmb_profesional = $_GET['cmb_profesional'];
 
 
 
@@ -51,19 +52,38 @@ $sql = "SELECT s.id as ID,
                 left join servicios se on se.id=l.servicio_id
                 left join profesionales p on p.id=l.profesional_id
                 where s.estado=2  and l.estado in (7)";
-                
-                if ($whatsapp != "" && $whatsapp == 'true') {
-                    $sql .= " and whatsapp='true' ";
-                }
-                if ($reunion != "" && $reunion == 'true') {
-                    $sql .= " and reunion='true' ";
-                }
-                if ($mensualidad != "" && $mensualidad == 'true') {
-                    $sql .= " and mensualidad='true' ";
+
+                if($cmb_whatsapp!=""){
+                    if($cmb_whatsapp==1){
+                        $sql.=" and IFNULL(whatsapp,'false')='true'";
+                    }else if($cmb_whatsapp==0){
+                        $sql.=" and IFNULL(whatsapp,'false')='false'";
+                    }                
                 }
 
+                if($cmb_reunion!=""){
+                    if($cmb_reunion==1){
+                        $sql.=" and IFNULL(reunion,'false')='true'";
+                    }else if($cmb_reunion==0){
+                        $sql.=" and IFNULL(reunion,'false')='false'";
+                    }                
+                }
 
-                $sql .= "order by s.id asc";
+                if($cmb_pago!=""){
+                    if($cmb_pago==1){
+                        $sql.=" and IFNULL(mensualidad,'false')='true'";
+                    }else if($cmb_pago==0){
+                        $sql.=" and IFNULL(mensualidad,'false')='false'";
+                    }                
+                }
+
+                if($cmb_profesional!="null" && $cmb_profesional!="-"){
+                    $sql.=" and l.profesional_id=".$cmb_profesional." ";
+                }
+
+       
+
+                $sql.="order by s.id asc";
 $result = $conn->query($sql);
 
 // print_r($result);

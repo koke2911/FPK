@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 
 $usuario = $_SESSION['id_usuario'];
 

@@ -114,6 +114,12 @@ if (empty($_SESSION)) {
                                             <th>Estado</th>
                                             <th>Ficha</th>
                                             <th>Traza</th>
+                                            <th>Servicio</th>
+                                            <th>Sesiones</th>
+                                            <th>Nombre Terapeuta</th>
+                                            <th>Whatsapp</th>
+                                            <th>Reunión OnLine</th>
+                                            <th>Mensualidad</th>
 
                                         </tr>
                                     </thead>

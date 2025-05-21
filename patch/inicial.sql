@@ -1,6 +1,8 @@
-create database playkids;
+-- create database playkids;
 
-use playkids;
+-- use playkids;
+
+SET SQL_SAFE_UPDATES = 0;
 
 CREATE TABLE usuarios (
   id INT(10) NOT NULL AUTO_INCREMENT,
@@ -51,7 +53,7 @@ alter table solicitudes add fecha_nacimiento date;
 alter table solicitudes modify edad varchar(100);
 
 
---drop table lista_espera;
+-- drop table lista_espera;
 
 create table lista_espera (
 id INT(10) NOT NULL AUTO_INCREMENT,
